@@ -2,6 +2,7 @@ import './index.css';
 import './App.css';
 import NavBar from './components/navBar';
 import LeftBar from './components/leftBar';
+import MainBody from './components/mainBody';
 
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
       <NavBar />
       <div className="App-body">
         <LeftBar />
+        <MainBody />
       </div>
     </div>
   );
