@@ -8,7 +8,7 @@ import { ImRocket } from 'react-icons/im'
 export default function LeftBar() {
     return (
         <div className="left-bar">
-            <LeftOption title={"Post"}>
+            <LeftOption title={"Ask !"}>
                 <FaPlus size={20} />
             </LeftOption>
 
