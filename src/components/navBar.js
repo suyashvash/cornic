@@ -16,6 +16,7 @@ export default function NavBar() {
                         <Nav.Link href="/cronic@ask"><FaPlus size={20} color={'white'} /></Nav.Link>
                     </Nav.Item>
                     <Nav.Item className="ml-auto">
+
                         <Nav.Link href="/cronic@profile"><ImUser size={25} color={'white'} /></Nav.Link>
                     </Nav.Item>
                 </Nav>

@@ -17,6 +17,7 @@
   flex-direction: row;
   justify-content: flex-start;
   background-color: var(--base);
+  
 }
 
 .left-bar{
@@ -129,13 +130,14 @@ a.sub-ans,button.sub-ans{
   margin: 10px 4px;
 }
 
-.ask-question-page{
+.ask-question-page,.login-page{
   width: 50%;
   color: white;
   margin: auto;
   background-color: var(--second-base);
   padding: 20px;
   border-radius: 10px;
+  margin-top: 50px;
 }
 .ask-topic{
   margin: 10px;

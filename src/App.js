@@ -9,7 +9,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import Login from './components/login';
+import UserPage from './components/userpage';
 import Answer from './components/answer';
 import AskQuestion from './components/ask';
 
@@ -22,15 +22,14 @@ function App() {
       <Router>
         <NavBar />
         <div className="App-body">
-          <LeftBar />
           <Switch>
-            <Route path="/" exact component={() => <MainBody topic="general" />} />
-            <Route path="/cronic@anime" exact component={() => <MainBody topic="anime" />} />
-            <Route path="/cronic@gaming" exact component={() => <MainBody topic="gaming" />} />
-            <Route path="/cronic@programming" exact component={() => <MainBody topic="programming" />} />
-            <Route path="/cronic@movies" exact component={() => <MainBody topic="movies" />} />
-            <Route path="/cronic@studies" exact component={() => <MainBody topic="studies" />} />
-            <Route path="/cronic@profile" exact component={() => <Login />} />
+            <Route path="/" exact component={() => <Lobby topic="general" />} />
+            <Route path="/cronic@anime" exact component={() => <Lobby topic="anime" />} />
+            <Route path="/cronic@gaming" exact component={() => <Lobby topic="gaming" />} />
+            <Route path="/cronic@programming" exact component={() => <Lobby topic="programming" />} />
+            <Route path="/cronic@movies" exact component={() => <Lobby topic="movies" />} />
+            <Route path="/cronic@studies" exact component={() => <Lobby topic="studies" />} />
+            <Route path="/cronic@profile" exact component={() => <UserPage mode={"logged-in"} />} />
             <Route path="/cronic@ask" exact component={() => <AskQuestion />} />
             <Route path="/cronic@postAnswer" exact component={() => <Answer />} />
           </Switch>
@@ -38,6 +37,17 @@ function App() {
       </Router>
     </div>
   );
+}
+
+const Lobby = ({ topic }) => {
+  return (
+    <>
+      <LeftBar />
+      <MainBody topic={topic} />
+    </>
+
+  )
+
 }
 
 export default App;
