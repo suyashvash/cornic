@@ -1,8 +1,8 @@
 
 export default function LeftOption(props) {
     return (
-        <div className="left-option" >
+        <a className="left-option" href={props.link}>
             <h5>{props.title}</h5>
-        </div>
+        </a>
     )
 }

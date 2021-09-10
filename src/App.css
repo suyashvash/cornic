@@ -1,7 +1,10 @@
 :root{
   --base :#171a1f;
   --second-base : #23252f;
+  background-color: var(--base);
 }
+
+
 
 .nav-head{
   display: flex;
@@ -41,11 +44,15 @@
   padding: 20px;
   cursor: pointer;
   background-color: var(--second-base);
+  color: white;
+  text-decoration: none;
 }
 
 .left-option:hover{
   transition: ease 0.2s;
   background-color: var(--base);
+  color: white;
+  text-decoration: none;
 }
 
 .left-option>h5{
@@ -106,7 +113,7 @@ h4.question{
   font-size: 12px;
 }
 
-button.sub-ans{
+a.sub-ans,button.sub-ans{
   margin-top: 15px;
 }
 
@@ -122,3 +129,16 @@ button.sub-ans{
   margin: 10px 4px;
 }
 
+.ask-question-page{
+  width: 50%;
+  color: white;
+  margin: auto;
+  background-color: var(--second-base);
+  padding: 20px;
+  border-radius: 10px;
+}
+.ask-topic{
+  margin: 10px;
+  font-size: 18px;
+  margin-left: 0px;
+}
