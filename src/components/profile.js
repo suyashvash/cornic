@@ -10,13 +10,10 @@ export default function Profile() {
     return (
         <div className="profile-page">
             <div className="profile-card">
-
                 <img src={userPic} width={90} alt="profile pic" />
-
                 <h5>{userEmailRedux}</h5>
                 <p>Hello I am a corniac.</p>
             </div>
-
         </div>
     )
 }

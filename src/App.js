@@ -15,7 +15,7 @@ import AskQuestion from './components/ask';
 import Profile from './components/profile';
 import SignUpPage from './components/signUP';
 
-import { selectUser } from '../src/features/userSlice'
+
 import { useSelector } from "react-redux";
 import { selectUserEmail } from "../src/features/userSlice";
 
@@ -38,8 +38,8 @@ function App() {
             <Route path="/cornic@studies" exact component={() => <Lobby topic="studies" />} />
             <Route path="/cornic@profile" exact component={(props) => <Profile  {...props} />} />
 
-            <Route path="/cornic@userlogin" exact component={(props) => !userEmail ? <SignIn {...props} /> : <Profile />} />
-            <Route path="/cornic@signup" exact component={() => !userEmail ? <SignUpPage /> : <Profile />} />
+            <Route path="/cornic@userlogin" exact component={(props) => userEmail == null ? <SignIn {...props} /> : <Profile />} />
+            <Route path="/cornic@signup" exact component={() => userEmail == null ? <SignUpPage /> : <Profile />} />
 
             <Route path="/cornic@ask" exact component={() => <AskQuestion />} />
             <Route path="/cornic@postAnswer" exact component={() => <Answer />} />
@@ -51,6 +51,7 @@ function App() {
 }
 
 const Lobby = ({ topic }) => {
+  const userEmailRedux = useSelector(selectUserEmail);
   return (
     <>
       <LeftBar />
