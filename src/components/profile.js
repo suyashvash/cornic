@@ -1,27 +1,22 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { projectFirestore } from "../firebase/config";
+// import { projectFirestore } from "../firebase/config";
+import { selectUserEmail } from "../features/userSlice";
+import { useSelector } from "react-redux";
+import userPic from '../assets/user.png'
 
-export default function Profile(props) {
+export default function Profile() {
+    const userEmailRedux = useSelector(selectUserEmail);
 
-    const dispatch = useDispatch();
-    const { state } = props.history.location;
-    const [userDetail, setUserDetail] = useState([])
-
-    useEffect(() => {
-        getDetails()
-    }, []);
-
-
-    const getDetails = () => {
-        let det = [];
-        const docRef = projectFirestore.collection("users").doc(`${state.emailId}`);
-        docRef.onSnapshot(doc => {
-            det.push(doc.data())
-            setUserDetail(det)
-        })
-    }
     return (
-        <div>Profile {state.emailId} </div>
+        <div className="profile-page">
+            <div className="profile-card">
+
+                <img src={userPic} width={90} alt="profile pic" />
+
+                <h5>{userEmailRedux}</h5>
+                <p>Hello I am a corniac.</p>
+            </div>
+
+        </div>
     )
 }

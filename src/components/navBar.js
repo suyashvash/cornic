@@ -4,12 +4,12 @@ import Container from 'react-bootstrap/Container'
 import { ImUser } from 'react-icons/im'
 import logo from '../assets/logo.png'
 import { FaPlus } from 'react-icons/fa'
-
-import { selectUser } from '../features/userSlice'
+import { selectUserEmail } from "../features/userSlice";
 import { useSelector } from 'react-redux'
 
 export default function NavBar() {
-    const user = useSelector(selectUser);
+    const userEmail = useSelector(selectUserEmail);
+
     return (
         <Navbar bg="dark" variant="dark">
             <Container>
@@ -19,7 +19,7 @@ export default function NavBar() {
                         <Nav.Link href="/cornic@ask"><FaPlus size={20} color={'white'} /></Nav.Link>
                     </Nav.Item>
                     <Nav.Item className="ml-auto">
-                        <Nav.Link href={user ? "cornic@profile" : "cornic@userlogin"}>
+                        <Nav.Link href={userEmail ? "cornic@profile" : "cornic@userlogin"}>
                             <ImUser size={25} color={'white'} />
                         </Nav.Link>
                     </Nav.Item>

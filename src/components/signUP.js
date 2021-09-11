@@ -21,7 +21,10 @@ export default function SignUpPage() {
             userEmail: email,
             profilePic: '',
             userBio: '',
-            userId: `${name}/${time}`
+            userId: `${name}/${time}`,
+            userQuestions: [],
+            userAnswer: [],
+
         }
 
         if (email == '' || password == '') { alert("Please fill all the fields") }

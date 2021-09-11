@@ -175,3 +175,7 @@ a.sub-ans,button.sub-ans{
 .sub-ans>a:hover,.sub-ans>a:visited{
   color: white;
 }
+
+.profile-page{
+  color: white;
+}

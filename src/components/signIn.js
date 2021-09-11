@@ -3,36 +3,20 @@ import Button from "react-bootstrap/Button"
 import logo from '../assets/logo.png'
 import { useState } from "react"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
-import {
-    Link
-} from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveUser, selectUserEmail } from "../features/userSlice";
 
 export default function SignIn(props) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorLog, setErrorLog] = useState('');
-    const [userDetail, setUserDetail] = useState([])
     const auth = getAuth();
 
+    // Redux
+    const dispatch = useDispatch();
+    const userEmail = useSelector(selectUserEmail);
 
-
-
-
-
-
-    // const setStore = () => {
-
-    //     dispatch(login({
-    //         name: userDetail.userName,
-    //         email: userDetail.userEmail,
-    //         name: userDetail.userName,
-    //         id: userDetail.userId,
-    //         profilePic: userDetail.profilePic,
-    //         bio: userDetail.userBio,
-    //     }));
-    // }
 
     const login = () => {
         if (email == '' || password == '') { alert("Please fill all the fields") }
@@ -40,12 +24,12 @@ export default function SignIn(props) {
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     const user = userCredential.user;
-                    props.history.push({ pathname: '/cornic@profile', state: { emailId: email } });
+                    dispatch(setActiveUser({ userEmail: email, }))
+                    props.history.push({ pathname: '/cornic@profile' });
                 })
                 .catch((error) => { const errorCode = error.code; setErrorLog(error.message) });
         }
     }
-
 
     return (
         <div className="login-page">
@@ -54,9 +38,7 @@ export default function SignIn(props) {
                 <h3>Cornic</h3>
                 <span>Ask the way you want !</span>
             </div>
-
             <div className="logger-div">
-
                 <h3>Sign In</h3>
                 <Form>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -68,14 +50,10 @@ export default function SignIn(props) {
                         <Form.Control onInputCapture={(e) => setPassword(e.target.value)} type="password" placeholder="****" />
                         {errorLog}
                     </Form.Group>
-
-
                     <Button onClick={login} className="sub-ans" variant="outline-primary" >Login</Button>
                     <Button className="sub-ans" href="cornic@signup" variant="secondary">Create Account</Button>
                 </Form>
-
             </div>
-
         </div >
     )
 }
