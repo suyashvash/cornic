@@ -1,14 +1,21 @@
-import { initializeApp } from 'firebase/app';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+
+
+
 
 var firebaseConfig = {
-    apiKey: "AIzaSyCFqNor6IznN2L6-20QlEUOw1TxfGleD-E",
-    authDomain: "cronic-social.firebaseapp.com",
-    projectId: "cronic-social",
-    storageBucket: "cronic-social.appspot.com",
-    messagingSenderId: "545734851722",
-    appId: "1:545734851722:web:73e5471c508dc2a3f00173"
+    apiKey: "AIzaSyAnjNjQdjYbZFNsIBGS1Qg9EgGmP9xIWo0",
+    authDomain: "cornic-ask.firebaseapp.com",
+    projectId: "cornic-ask",
+    storageBucket: "cornic-ask.appspot.com",
+    messagingSenderId: "374857855803",
+    appId: "1:374857855803:web:f4e41c5b2c88bfccc87d1e"
 };
 
-const app = initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
+const projectFirestore = firebase.firestore()
 
-export default app;
+// Get a reference to the database service
+export { projectFirestore };

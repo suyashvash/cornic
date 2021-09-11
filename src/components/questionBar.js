@@ -21,7 +21,7 @@ export default function QuestionTab({ question, time, questionId, author }) {
                 <Badge className="topic-badge" pill bg="primary">Movies</Badge>
             </div> */}
 
-            <Button href={"/cronic@postAnswer"} className="sub-ans" size={'sm'} variant="outline-primary">Answer</Button>
+            <Button href={"/cornic@postAnswer"} className="sub-ans" size={'sm'} variant="outline-primary">Answer</Button>
 
         </div >
     )

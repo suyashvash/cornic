@@ -7,11 +7,11 @@ export default function LeftBar() {
     return (
         <div className="left-bar">
             <h5><ImRocket /> Suggested</h5>
-            <LeftOption title={"Studies"} link={"/cronic@studies"} />
-            <LeftOption title={"Anime"} link={"/cronic@anime"} />
-            <LeftOption title={"Gaming"} link={"/cronic@gaming"} />
-            <LeftOption title={"Programming"} link={"/cronic@programming"} />
-            <LeftOption title={"Movies"} link={"/cronic@movies"} />
+            <LeftOption title={"Studies"} link={"/cornic@studies"} />
+            <LeftOption title={"Anime"} link={"/cornic@anime"} />
+            <LeftOption title={"Gaming"} link={"/cornic@gaming"} />
+            <LeftOption title={"Programming"} link={"/cornic@programming"} />
+            <LeftOption title={"Movies"} link={"/cornic@movies"} />
 
 
         </div>
