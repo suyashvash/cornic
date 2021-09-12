@@ -4,12 +4,18 @@
   background-color: var(--base);
 }
 
+nav.navbar{
+  padding: 20px;
+  background-color: var(--base);
+  
+}
 
-
-.nav-head{
+.nav-head,.nav-head:visited{
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
+  text-decoration: none;
 }
 
 .App-body{
@@ -81,6 +87,7 @@
   width: 80%;
   margin: auto;
   margin-top: 20px;
+
 }
 
 .question{
@@ -232,10 +239,7 @@ a.sub-ans,button.sub-ans{
   margin-bottom: 30px;
 }
 
-/* .profile-card:hover{
-  transform: translateY(-5%);
-  transition: ease 0.5s;
-} */
+
 
 .data-card{
   width: 800px;
@@ -247,4 +251,24 @@ a.sub-ans,button.sub-ans{
 .question-head{
   position: absolute;
   top: 20px;
+}
+
+
+
+.ask-a-ques{
+  padding: 10px 15px;
+  border-radius: 20px;
+color: white;
+background-color: var(--base);
+text-decoration: none;
+margin: 10px 0px;
+
+}
+
+.ask-a-ques:hover{
+  color: white;
+}
+
+.m-ans{
+  margin: 5px;
 }

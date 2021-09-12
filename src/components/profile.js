@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { projectFirestore } from "../firebase/config";
 import { selectUserEmail } from "../features/userSlice";
 import { useSelector } from "react-redux";
-import userPic from '../assets/user.png'
+
 
 export default function Profile() {
     const userEmailRedux = useSelector(selectUserEmail);
@@ -43,7 +43,7 @@ export default function Profile() {
 
                         <div className="profile-card data-card" >
                             <h4 className="question-head">My Questions</h4>
-                            <h3 className="user-questions">{item.userQuestions}</h3>
+
 
                         </div>
                     </>

@@ -23,8 +23,7 @@ export default function SignUpPage() {
             profilePic: userPic,
             userBio: 'Hi, I am a corniac !',
             userId: `${name}/${time}`,
-            userQuestions: [],
-            userAnswer: [],
+
 
         }
 
@@ -49,7 +48,7 @@ export default function SignUpPage() {
                 <span>Ask the way you want !</span>
             </div>
 
-            <Modal show={show} onHide={() => setShow(false)}>
+            <Modal show={show} onHide={() => setShow(false)} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Sign Up</Modal.Title>
                 </Modal.Header>
