@@ -272,3 +272,32 @@ margin: 10px 0px;
 .m-ans{
   margin: 5px;
 }
+
+.topic-badge{
+  margin: 10px 0px;
+}
+
+.ques-des{
+  padding: 20px 10px;
+    background-color: var(--base);
+    border-radius: 10px;
+    width: 100%;
+
+}
+
+.mb-3{
+  margin-top: 30px;
+}
+
+.ans-patch{
+  display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: center;
+}
+.answer-author{
+  color:grey;
+  font-size: 14px;
+  font-style: italic;
+
+}

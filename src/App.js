@@ -7,8 +7,9 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+
 } from "react-router-dom";
+
 import SignIn from './components/signIn';
 import Answer from './components/answer';
 import AskQuestion from './components/ask';
@@ -41,8 +42,8 @@ function App() {
             <Route path="/cornic@profile" exact component={(props) => <Profile  {...props} />} />
             <Route path="/cornic@userlogin" exact component={(props) => loggedIn ? <Profile /> : <SignIn {...props} />} />
             <Route path="/cornic@signup" exact component={() => loggedIn ? <Profile /> : <SignUpPage />} />
-            <Route path="/cornic@ask" exact component={() => <AskQuestion />} />
-            <Route path="/cornic@postAnswer" exact component={() => <Answer />} />
+            <Route path="/cornic@ask" exact component={(props) => loggedIn ? <AskQuestion /> : <SignIn {...props} />} />
+            <Route path="/cornic@postAnswer" exact component={(props) => loggedIn ? <Answer /> : <SignIn {...props} />} />
           </Switch>
         </div>
       </Router>

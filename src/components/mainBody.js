@@ -44,7 +44,8 @@ export default function MainBody({ topic }) {
                         author={item.author}
                         authorPic={item.authorPic}
                         time={dateFormater(item.quesTime)}
-                        questionId={item.questionId} />
+                        questionId={item.questionId}
+                    />
                 ))
 
             }
