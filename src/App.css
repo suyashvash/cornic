@@ -178,4 +178,66 @@ a.sub-ans,button.sub-ans{
 
 .profile-page{
   color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.profile-card{
+  background-color: var(--second-base);
+  padding: 20px;
+  border-radius: 10px;
+  margin: auto;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+  transform: translateY(0%);
+  transition: ease 0.5s;
+
+}
+
+.user-name{
+  margin: 15px;
+  background-color: var(--base);
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+.user-id{
+  margin: 5px;
+  color: rgb(255, 255, 255);
+  font-style: oblique;
+}
+
+.user-email{
+  margin: 10px;
+}
+
+.user-bio{
+  margin: 10px;
+  color: darkgrey;
+    font-size: 17px;
+    font-style: italic;
+}
+
+.profile-head{
+  margin-bottom: 30px;
+}
+
+.profile-card:hover{
+  transform: translateY(-5%);
+  transition: ease 0.5s;
+}
+
+.data-card{
+  width: 800px;
+  align-items: flex-start;
+  padding-left: 50px;
 }

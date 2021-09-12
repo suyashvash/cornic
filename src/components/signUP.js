@@ -2,6 +2,7 @@ import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import Modal from 'react-bootstrap/Modal'
 import logo from '../assets/logo.png'
+import userPic from '../assets/user.png'
 import { useState } from "react"
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { projectFirestore } from "../firebase/config";
@@ -19,8 +20,8 @@ export default function SignUpPage() {
         const data = {
             userName: name,
             userEmail: email,
-            profilePic: '',
-            userBio: '',
+            profilePic: userPic,
+            userBio: 'Hi, I am a corniac !',
             userId: `${name}/${time}`,
             userQuestions: [],
             userAnswer: [],
