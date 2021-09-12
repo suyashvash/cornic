@@ -24,7 +24,10 @@ export default function SignIn(props) {
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     const user = userCredential.user;
-                    dispatch(setActiveUser({ userEmail: email, }))
+                    dispatch(setActiveUser({
+                        userEmail: email,
+                        loggedIn: true,
+                    }))
                     props.history.push({ pathname: '/cornic@profile' });
                 })
                 .catch((error) => { const errorCode = error.code; setErrorLog(error.message) });

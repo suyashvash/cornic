@@ -4,12 +4,12 @@ import Container from 'react-bootstrap/Container'
 import { ImUser } from 'react-icons/im'
 import logo from '../assets/logo.png'
 import { FaPlus } from 'react-icons/fa'
-import { selectUserEmail } from "../features/userSlice";
+import { selectLoggedIN } from "../features/userSlice";
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 export default function NavBar() {
-    const userEmail = useSelector(selectUserEmail);
+    const loggedIn = useSelector(selectLoggedIN);
 
     return (
         <Navbar bg="dark" variant="dark">
@@ -20,10 +20,10 @@ export default function NavBar() {
                         <Link to={{ pathname: "/cornic@ask" }}><FaPlus size={20} color={'white'} /></Link>
                     </Nav.Item>
                     <Nav.Item className="ml-auto">
-                        {userEmail == null ?
-                            <Link to={{ pathname: "/cornic@userlogin" }}><ImUser size={25} color={'white'} /></Link>
-                            :
+                        {loggedIn ?
                             <Link to={{ pathname: "/cornic@profile" }}><ImUser size={25} color={'white'} /></Link>
+                            :
+                            <Link to={{ pathname: "/cornic@userlogin" }}><ImUser size={25} color={'white'} /></Link>
                         }
                     </Nav.Item>
                 </Nav>

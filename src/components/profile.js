@@ -12,6 +12,8 @@ export default function Profile() {
         getUserDetails()
     }, [])
 
+
+
     const getUserDetails = () => {
         let detail = [];
         const docRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
@@ -19,6 +21,7 @@ export default function Profile() {
             detail.push(doc.data())
             setUserDetail(detail)
         })
+
 
     }
 
@@ -31,14 +34,15 @@ export default function Profile() {
                         <div className="profile-card" key={index}>
                             <h3 className="profile-head">My Profile</h3>
                             <img src={item.profilePic} width={90} alt="profile pic" />
-                            <h3 className="user-name">{item.userName}</h3>
-                            <span className="user-id">{item.userId}</span>
-                            <span className="user-email">{item.userEmail}</span>
+                            <h3 className="user-name">Username - {item.userName}</h3>
+                            <span className="user-id">Id- {item.userId}</span>
+                            <span className="user-email">Email - {item.userEmail}</span>
+                            <span >My Bio</span>
                             <span className="user-bio">"{item.userBio}"</span>
                         </div>
 
-                        <div className="profile-card data-card" key={index}>
-                            <h4 className="profile-head">My Questions</h4>
+                        <div className="profile-card data-card" >
+                            <h4 className="question-head">My Questions</h4>
                             <h3 className="user-questions">{item.userQuestions}</h3>
 
                         </div>

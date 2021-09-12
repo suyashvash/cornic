@@ -199,6 +199,7 @@ a.sub-ans,button.sub-ans{
   margin: 30px;
   transform: translateY(0%);
   transition: ease 0.5s;
+  text-align: center;
 
 }
 
@@ -231,13 +232,19 @@ a.sub-ans,button.sub-ans{
   margin-bottom: 30px;
 }
 
-.profile-card:hover{
+/* .profile-card:hover{
   transform: translateY(-5%);
   transition: ease 0.5s;
-}
+} */
 
 .data-card{
   width: 800px;
   align-items: flex-start;
   padding-left: 50px;
+  height: 490px;
+}
+
+.question-head{
+  position: absolute;
+  top: 20px;
 }
