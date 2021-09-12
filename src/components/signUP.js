@@ -23,16 +23,14 @@ export default function SignUpPage() {
             profilePic: userPic,
             userBio: 'Hi, I am a corniac !',
             userId: `${name}/${time}`,
-
-
         }
 
-        if (email == '' || password == '') { alert("Please fill all the fields") }
+        if (email === '' || password === '') { alert("Please fill all the fields") }
         else {
             createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     const user = userCredential.user;
-                    const addUserProfile = projectFirestore.collection("users").doc(`${email}`).set(data);
+                    projectFirestore.collection("users").doc(`${email}`).set(data);
                     setShow(true);
                 })
                 .catch((error) => { const errorCode = error.code; const errorMessage = error.message; setErrorLog(errorMessage) });
@@ -43,19 +41,16 @@ export default function SignUpPage() {
     return (
         <div className="login-page">
             <div className="cornic-poster">
-                <img src={logo} />
+                <img src={logo} alt={"Cornic Poster"} />
                 <h3>Cornic</h3>
                 <span>Ask the way you want !</span>
             </div>
-
             <Modal show={show} onHide={() => setShow(false)} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Sign Up</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>Account Created succcesfully !</Modal.Body>
-
             </Modal>
-
             <div className="logger-div">
                 <h3>Sign Up</h3>
                 <Form>
@@ -72,7 +67,6 @@ export default function SignUpPage() {
                         <Form.Control type="name" onInputCapture={(e) => setPassword(e.target.value)} />
                         {errorLog}
                     </Form.Group>
-
                     <Button className="sub-ans" variant="outline-primary" onClick={signUp} >Sign Up</Button>
                     <Button className="sub-ans" href="cornic@userlogin" variant="secondary">Login</Button>
                 </Form>

@@ -12,14 +12,11 @@ export default function SignIn(props) {
     const [password, setPassword] = useState('');
     const [errorLog, setErrorLog] = useState('');
     const auth = getAuth();
-
-    // Redux
     const dispatch = useDispatch();
     const userEmail = useSelector(selectUserEmail);
 
-
     const login = () => {
-        if (email == '' || password == '') { alert("Please fill all the fields") }
+        if (email === '' || password === '') { alert("Please fill all the fields") }
         else {
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
@@ -37,7 +34,7 @@ export default function SignIn(props) {
     return (
         <div className="login-page">
             <div className="cornic-poster">
-                <img src={logo} />
+                <img src={logo} alt="Corinic Poster" />
                 <h3>Cornic</h3>
                 <span>Ask the way you want !</span>
             </div>

@@ -1,7 +1,5 @@
-
 import { ImRocket } from 'react-icons/im'
 import LeftOption from './LeftOption'
-
 
 export default function LeftBar() {
     return (
@@ -13,8 +11,6 @@ export default function LeftBar() {
             <LeftOption title={"Gaming"} link={"/cornic@gaming"} />
             <LeftOption title={"Programming"} link={"/cornic@programming"} />
             <LeftOption title={"Movies"} link={"/cornic@movies"} />
-
-
         </div>
     )
 }

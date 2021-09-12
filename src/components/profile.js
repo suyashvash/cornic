@@ -4,32 +4,22 @@ import { selectUserEmail, setUserLogOutState } from "../features/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 
-
-
 export default function Profile(props) {
     const userEmailRedux = useSelector(selectUserEmail);
     const [userDetail, setUserDetail] = useState([]);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        getUserDetails()
-
-
-    }, [])
+    useEffect(() => { getUserDetails() }, [])
 
     const getUserDetails = () => {
         let detail = [];
         const docRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
         docRef.onSnapshot((doc) => { detail.push(doc.data()); setUserDetail(detail); })
-
     }
-
-
 
     const logout = () => {
         dispatch(setUserLogOutState());
         props.history.push({ pathname: '/' });
-
     }
 
     return (
@@ -47,7 +37,6 @@ export default function Profile(props) {
                             <span className="user-bio">"{item.userBio}"</span>
                             <Button onClick={logout} className="sub-ans" variant="light">Log-out</Button>
                         </div>
-
                         {/* <div className="profile-card data-card" >
                             <h4 className="question-head">My Questions</h4>
                             <h5>Q here is the question ?</h5>

@@ -17,24 +17,16 @@ export default function AskQuestion() {
     const [userDetail, setUserDetail] = useState([]);
 
 
-    useEffect(() => {
-        getUserDetails()
-    }, [])
+    useEffect(() => { getUserDetails() }, [])
 
     const getUserDetails = () => {
         let detail = [];
         const docRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
-        docRef.onSnapshot((doc) => {
-            detail.push(doc.data())
-            setUserDetail(detail)
-        })
+        docRef.onSnapshot((doc) => { detail.push(doc.data()); setUserDetail(detail) })
     }
 
-
-
     const submitQuestion = () => {
-        if (question != '') {
-            getUserDetails()
+        if (question !== '') {
             let answers = [];
             const time = Date.now();
             const questionId = `${userDetail[0].userName}.${time}`
@@ -50,13 +42,8 @@ export default function AskQuestion() {
                 answers: answers,
                 quesTime: time
             }
-            const addQuestion = projectFirestore.collection("questionBank").doc(`${questionId}`).set(data);
-
-            setShow(true);
-            setQuestion('');
-            setDescription('');
-            setTopic('General');
-
+            projectFirestore.collection("questionBank").doc(`${questionId}`).set(data);
+            setShow(true); setQuestion(''); setDescription(''); setTopic('General');
         }
         else { alert("Question is Empty") }
     }
@@ -90,11 +77,7 @@ export default function AskQuestion() {
                     </Dropdown.Menu>
                 </Dropdown>
                 <h5 className="ask-topic">{topic}</h5>
-
-
-
             </Form>
-
             <Button className="sub-ans" variant="outline-primary" onClick={submitQuestion}>Submit</Button>
         </div>
     )
