@@ -7,7 +7,6 @@
 nav.navbar{
   padding: 20px;
   background-color: var(--base);
-  
 }
 
 .nav-head,.nav-head:visited{
@@ -23,7 +22,6 @@ nav.navbar{
   flex-direction: row;
   justify-content: flex-start;
   background-color: var(--base);
-  
 }
 
 .left-bar{

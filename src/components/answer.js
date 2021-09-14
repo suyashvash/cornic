@@ -33,6 +33,7 @@ export default function Answer(props) {
                 { answers: [...questionPack[0].answers, { answer: answer, by: `${userEmailRedux}` }] },
                 { merge: true })
             setShow(true)
+            setAnswer('');
         }
     }
 
