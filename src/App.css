@@ -292,6 +292,7 @@ margin: 10px 0px;
     flex-direction: column;
     align-content: space-between;
     justify-content: center;
+    margin-top: 20px;
 }
 .answer-author{
   color:grey;

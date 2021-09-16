@@ -56,21 +56,23 @@ export default function Answer(props) {
                             <Form.Label>Description</Form.Label>
                             <Form.Label className="ques-des">{questionPack[0].questionDesc} </Form.Label>
                         </Form.Group>
-                        {questionPack[0].answers &&
-                            questionPack[0].answers.map((item, index) => (
-                                <Form.Group key={index} className="mb-3" controlId="exampleForm.ControlTextarea1">
-                                    <Form.Label>Answers</Form.Label>
-                                    <div className="ques-des ans-patch">
+
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                            <Form.Label>Answers</Form.Label>
+                            {questionPack[0].answers &&
+                                questionPack[0].answers.map((item, index) => (
+                                    <div key={index} className="ques-des ans-patch">
                                         <Form.Label>{item.answer} </Form.Label>
                                         <br />
                                         <Form.Label className="answer-author">{item.by} </Form.Label>
                                     </div>
-                                </Form.Group>
-                            ))
-                        }
+
+                                ))
+                            }
+                        </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                             <Form.Label>Your Answer</Form.Label>
-                            <Form.Control defaultValue={answer} onInputCapture={(e) => setAnswer(e.target.value)} as="textarea" rows={3} placeholder={"My answer is ..."} />
+                            <Form.Control value={answer} onInputCapture={(e) => setAnswer(e.target.value)} as="textarea" rows={3} placeholder={"My answer is ..."} />
                         </Form.Group>
                     </Form>
                     <Button onClick={submitAnswer} className="sub-ans" variant="outline-primary" >Submit</Button>
