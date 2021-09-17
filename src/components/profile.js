@@ -24,14 +24,12 @@ export default function Profile(props) {
         <div className="profile-page">
             {userDetail.length !== 0 &&
                 <div className="profile-card">
-                    {console.log(userDetail)}
                     <img src={userDetail[0].profilePic} width={100} alt="profile pic" />
                     <div className="profile-sub-head">
                         <h3 className="name">{userDetail[0].name}</h3>
                         <span className="user-bio">"{userDetail[0].userBio}"</span>
                         <h3 className="user-name">{userDetail[0].userName}</h3>
                         <span className="user-email">{userDetail[0].userEmail}</span>
-
                         <Button size={'sm'} onClick={logout} className="sub-ans log-out" variant="light"><BiLogOut size={20} /> Log out</Button>
                     </div>
                 </div>
@@ -39,7 +37,6 @@ export default function Profile(props) {
                     <h4 className="question-head">My Questions</h4>
                     <h5>Q here is the question ?</h5>
                 </div> */
-
             }
         </div >
     )

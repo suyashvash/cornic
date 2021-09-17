@@ -1,5 +1,8 @@
 # Cornic - Ask the way you want !
 
+[ This is a development branch hence this branch contains new features and bugs.]
+[ Please refer Master Branch]
+
 Cornic is a social open source platform where you can ask and answers based on different topics. 
 Cornic have all sort of topics and genres to talk about.
 
