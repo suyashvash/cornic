@@ -16,8 +16,12 @@ export default function SignUpPage() {
     const [show, setShow] = useState(false);
     const auth = getAuth();
 
+
     const signUp = () => {
         const time = Date.now();
+        const myAnswers = [];
+        const myQuestions = [];
+        const savedQuestions = [];
         const data = {
             userName: userName,
             name: name,
@@ -25,6 +29,9 @@ export default function SignUpPage() {
             profilePic: userPic,
             userBio: 'Hi, I am a corniac !',
             userId: `${userName}/${time}`,
+            myAnswers: myAnswers,
+            myQuestions: myQuestions,
+            savedQuestions: savedQuestions,
         }
 
         if (email === '' || password === '') { alert("Please fill all the fields") }

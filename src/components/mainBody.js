@@ -26,11 +26,13 @@ export default function MainBody({ topic }) {
                 questionPack.map((item, index) => (
                     <QuestionTab
                         key={index}
+                        questionBar={true}
                         question={item.userQuestion}
                         author={item.author}
                         authorPic={item.authorPic}
                         time={dateFormater(item.quesTime)}
                         questionId={item.questionId}
+                        profileView={false}
                     />
                 ))
             }

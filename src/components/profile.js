@@ -4,6 +4,10 @@ import { selectUserEmail, setUserLogOutState } from "../features/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import { BiLogOut } from 'react-icons/bi';
+import QuestionTab from "./questionBar";
+
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
 export default function Profile(props) {
     const userEmailRedux = useSelector(selectUserEmail);
@@ -23,20 +27,69 @@ export default function Profile(props) {
     return (
         <div className="profile-page">
             {userDetail.length !== 0 &&
-                <div className="profile-card">
-                    <img src={userDetail[0].profilePic} width={100} alt="profile pic" />
-                    <div className="profile-sub-head">
-                        <h3 className="name">{userDetail[0].name}</h3>
-                        <span className="user-bio">"{userDetail[0].userBio}"</span>
-                        <h3 className="user-name">{userDetail[0].userName}</h3>
-                        <span className="user-email">{userDetail[0].userEmail}</span>
-                        <Button size={'sm'} onClick={logout} className="sub-ans log-out" variant="light"><BiLogOut size={20} /> Log out</Button>
+                <>
+                    <div className="profile-card">
+                        <img src={userDetail[0].profilePic} width={100} alt="profile pic" />
+                        <div className="profile-sub-head">
+                            <h3 className="name">{userDetail[0].name}</h3>
+                            <span className="user-bio">"{userDetail[0].userBio}"</span>
+                            <h3 className="user-name">{userDetail[0].userName}</h3>
+                            <span className="user-email">{userDetail[0].userEmail}</span>
+                            <Button size={'sm'} onClick={logout} className="sub-ans log-out" variant="light"><BiLogOut size={20} /> Log out</Button>
+                        </div>
                     </div>
-                </div>
-                /* <div className="profile-card data-card" >
-                    <h4 className="question-head">My Questions</h4>
-                    <h5>Q here is the question ?</h5>
-                </div> */
+                    <div className="data-card" >
+                        <div className="profile-tab-holder">
+                            <Tabs>
+                                <TabList>
+                                    <Tab>My Questions</Tab>
+                                    <Tab>My Answers</Tab>
+                                    <Tab>Stars</Tab>
+                                </TabList>
+
+
+                                <TabPanel>
+                                    {userDetail[0].myQuestions &&
+                                        userDetail[0].myQuestions.map((item, index) => (
+                                            <QuestionTab
+                                                key={index}
+                                                questionBar={true}
+                                                profileView={true}
+                                                question={item.question}
+                                                author={""}
+                                                authorPic={""}
+                                                time={""}
+                                                questionId={item.id}
+
+                                            />
+                                        ))
+                                    }
+
+                                </TabPanel>
+                                <TabPanel>
+                                    {userDetail[0].myAnswers &&
+                                        userDetail[0].myAnswers.map((item, index) => (
+                                            <QuestionTab
+                                                key={index}
+                                                profileView={true}
+                                                answerBar={true}
+                                                question={item.question}
+                                                answer={item.answer}
+                                                questionId={item.id}
+
+                                            />
+                                        ))
+                                    }
+                                </TabPanel>
+                                <TabPanel>
+                                    <h4>Star / Saved Questions here</h4>
+                                </TabPanel>
+                            </Tabs>
+
+                        </div>
+
+                    </div>
+                </>
             }
         </div >
     )

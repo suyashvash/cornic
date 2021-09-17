@@ -14,15 +14,22 @@ export default function Answer(props) {
     const [show, setShow] = useState(false);
     const [submit, setSubmit] = useState(false);
     const [questionPack, setQuestionPack] = useState([]);
-    const questionDetails = history.location.state;
-    const quesRef = projectFirestore.collection('questionBank').doc(questionDetails.questionId)
+    const [userDetail, setUserDetail] = useState([]);
+    const quesId = history.location.state;
+    const quesRef = projectFirestore.collection('questionBank').doc(quesId)
     const userEmailRedux = useSelector(selectUserEmail);
+    const userRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
 
-    useEffect(() => { getQuestion() }, [submit])
+    useEffect(() => { getQuestion(); getUserDetails() }, [submit])
 
     const getQuestion = () => {
         let quesPack = [];
         quesRef.onSnapshot((doc) => { quesPack.push(doc.data()); setQuestionPack(quesPack) })
+    }
+
+    const getUserDetails = () => {
+        let detail = [];
+        userRef.onSnapshot((doc) => { detail.push(doc.data()); setUserDetail(detail) })
     }
 
     const submitAnswer = () => {
@@ -31,6 +38,10 @@ export default function Answer(props) {
             setSubmit(!submit)
             quesRef.set(
                 { answers: [...questionPack[0].answers, { answer: answer, by: `${userEmailRedux}` }] },
+                { merge: true })
+
+            userRef.set(
+                { myAnswers: [...userDetail[0].myAnswers, { answer: answer, question: questionPack[0].userQuestion, id: `${questionPack[0].questionId}` }] },
                 { merge: true })
             setShow(true)
             setAnswer('');
@@ -49,28 +60,23 @@ export default function Answer(props) {
             {questionPack.length !== 0 ?
                 <>
                     <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <h2>{questionPack[0].userQuestion}</h2>
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                            <Form.Label>Description</Form.Label>
-                            <Form.Label className="ques-des">{questionPack[0].questionDesc} </Form.Label>
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                            <Form.Label>Answers</Form.Label>
+                        <div className="question-list">
+                            <h2 className="question-asked">{questionPack[0].userQuestion}</h2>
+                            <div className="ques-detail-holder"> <p>Asked by - {questionPack[0].author}</p> <p>Asked on -{questionPack[0].quesTime}</p>  <p>Topic -{questionPack[0].userTopic}</p>   </div>
+                            <p >{questionPack[0].questionDesc} </p>
+                        </div>
+                        <div className="answer-list" >
+                            <h5 className="answer-head">Answers</h5>
                             {questionPack[0].answers &&
                                 questionPack[0].answers.map((item, index) => (
-                                    <div key={index} className="ques-des ans-patch">
-                                        <Form.Label>{item.answer} </Form.Label>
-                                        <br />
-                                        <Form.Label className="answer-author">{item.by} </Form.Label>
+                                    <div className="answer-holder" key={index} >
+                                        <p>{item.answer} </p>
+                                        <p className="answer-author">{item.by} </p>
                                     </div>
-
                                 ))
                             }
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                        </div>
+                        <Form.Group className="mb-3 sub-ans-holder" controlId="exampleForm.ControlTextarea1">
                             <Form.Label>Your Answer</Form.Label>
                             <Form.Control value={answer} onInputCapture={(e) => setAnswer(e.target.value)} as="textarea" rows={3} placeholder={"My answer is ..."} />
                         </Form.Group>

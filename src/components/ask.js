@@ -15,14 +15,13 @@ export default function AskQuestion() {
     const [show, setShow] = useState(false);
     const userEmailRedux = useSelector(selectUserEmail);
     const [userDetail, setUserDetail] = useState([]);
+    const userRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
 
 
     useEffect(() => { getUserDetails() }, [])
 
     const getUserDetails = () => {
-        let detail = [];
-        const docRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
-        docRef.onSnapshot((doc) => { detail.push(doc.data()); setUserDetail(detail) })
+        let detail = []; userRef.onSnapshot((doc) => { detail.push(doc.data()); setUserDetail(detail) })
     }
 
     const submitQuestion = () => {
@@ -43,6 +42,10 @@ export default function AskQuestion() {
                 quesTime: time
             }
             projectFirestore.collection("questionBank").doc(`${questionId}`).set(data);
+            userRef.set(
+                { myQuestions: [...userDetail[0].myQuestions, { question: question, id: `${questionId}` }] },
+                { merge: true })
+
             setShow(true); setQuestion(''); setDescription(''); setTopic('General');
         }
         else { alert("Question is Empty") }

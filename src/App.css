@@ -191,7 +191,7 @@ a.sub-ans,button.sub-ans{
   color: white;
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
@@ -241,10 +241,11 @@ a.sub-ans,button.sub-ans{
 
 
 .data-card{
-  width: 800px;
+  width: 80%;
   align-items: flex-start;
   padding-left: 50px;
   height: 490px;
+  background-color: var(--second-base);
 }
 
 .question-head{
@@ -299,6 +300,7 @@ margin: 10px 0px;
   color:grey;
   font-size: 14px;
   font-style: italic;
+  align-self: flex-end;
 
 }
 
@@ -322,3 +324,61 @@ margin: 10px 0px;
 .mb-3{
   margin-top: 0px;
 }
+
+.profile-tab-holder{
+  margin-top: 30px;
+}
+
+.answer-list{
+  margin-top: 40px;
+
+}
+
+
+
+.answer-head::after {
+  content: '';
+  display: block;
+  width: 50%;
+  border-top: 1px solid rgb(88, 88, 88);}
+
+
+  .answer-holder{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: var(--base);
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 15px;
+  }
+
+  .answer-holder>p{
+    margin: 0px;
+    
+  }
+
+  .sub-ans-holder{
+    margin-top: 50px;
+  }
+
+  .ques-detail-holder{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    color: #a5a5a5;
+    margin: 10px 0px;
+  }
+
+  .profile-ques-view{
+    background-color: var(--base);
+    margin: 0px;
+    margin-top: 20px;
+  }
+
+  .answer-profile{
+    margin: 10px 0px;
+    color: grey;
+  }
