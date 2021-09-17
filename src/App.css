@@ -382,3 +382,13 @@ margin: 10px 0px;
     margin: 10px 0px;
     color: grey;
   }
+
+
+  .ques-btn-holder{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }

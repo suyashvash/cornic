@@ -1,9 +1,12 @@
 import Button from 'react-bootstrap/Button'
 import { useHistory } from "react-router-dom";
+import { BsBookmark, BsFillBookmarkFill } from 'react-icons/bs';
+
 
 export default function QuestionTab(props) {
     const history = useHistory()
     const goToAnswer = () => { history.push({ pathname: '/cornic@postAnswer', state: props.questionId }); }
+
 
     return (
         <div className={props.profileView ? "questions profile-ques-view" : "questions"} >
@@ -25,7 +28,16 @@ export default function QuestionTab(props) {
                     </div>
                 </div>
             }
-            <Button onClick={goToAnswer} className="sub-ans" size={'sm'} variant="outline-primary">Answer</Button>
+
+            <div className="ques-btn-holder">
+                <Button onClick={goToAnswer} className="sub-ans" size={'sm'} variant="outline-primary">Answer</Button>
+                {!props.profileView &&
+                    <a className="sub-ans" onClick={props.onSave}>
+                        {props.saved ? <BsFillBookmarkFill size={25} /> : <BsBookmark size={25} />}
+                    </a>
+                }
+            </div>
+
         </div >
     )
 }

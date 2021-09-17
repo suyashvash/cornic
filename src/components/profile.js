@@ -44,10 +44,8 @@ export default function Profile(props) {
                                 <TabList>
                                     <Tab>My Questions</Tab>
                                     <Tab>My Answers</Tab>
-                                    <Tab>Stars</Tab>
+                                    <Tab>Saved</Tab>
                                 </TabList>
-
-
                                 <TabPanel>
                                     {userDetail[0].myQuestions &&
                                         userDetail[0].myQuestions.map((item, index) => (
@@ -60,7 +58,6 @@ export default function Profile(props) {
                                                 authorPic={""}
                                                 time={""}
                                                 questionId={item.id}
-
                                             />
                                         ))
                                     }
@@ -76,13 +73,26 @@ export default function Profile(props) {
                                                 question={item.question}
                                                 answer={item.answer}
                                                 questionId={item.id}
-
                                             />
                                         ))
                                     }
                                 </TabPanel>
                                 <TabPanel>
-                                    <h4>Star / Saved Questions here</h4>
+                                    {userDetail[0].savedQuestions &&
+                                        userDetail[0].savedQuestions
+                                            .map((item, index) => (
+                                                <QuestionTab
+                                                    key={index}
+                                                    questionBar={true}
+                                                    profileView={true}
+                                                    question={item.question}
+                                                    author={""}
+                                                    authorPic={""}
+                                                    time={""}
+                                                    questionId={item.questionId}
+                                                />
+                                            ))
+                                    }
                                 </TabPanel>
                             </Tabs>
 
