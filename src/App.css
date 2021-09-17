@@ -122,6 +122,12 @@ h4.question{
 a.sub-ans,button.sub-ans{
   margin-top: 15px;
   margin-right: 10px;
+
+}
+
+.log-out{
+  align-self: flex-end;
+  margin-top: 20px;
 }
 
 .question-author{
@@ -192,13 +198,12 @@ a.sub-ans,button.sub-ans{
 }
 
 .profile-card{
-  background-color: var(--second-base);
-  padding: 20px;
+ 
   border-radius: 10px;
   margin: auto;
-  width: 350px;
+  width: 80%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   margin: 30px;
@@ -209,25 +214,21 @@ a.sub-ans,button.sub-ans{
 }
 
 .user-name{
-  margin: 15px;
-  background-color: var(--base);
-  padding: 10px 20px;
+
   border-radius: 30px;
   font-size: 20px;
   margin-bottom: 5px;
 }
 .user-id{
-  margin: 5px;
+
   color: rgb(255, 255, 255);
   font-style: oblique;
 }
 
-.user-email{
-  margin: 10px;
-}
+
 
 .user-bio{
-  margin: 10px;
+
   color: darkgrey;
     font-size: 17px;
     font-style: italic;
@@ -299,4 +300,25 @@ margin: 10px 0px;
   font-size: 14px;
   font-style: italic;
 
+}
+
+.profile-sub-head{
+  padding: 0px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+}
+
+.name-place{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.mb-3{
+  margin-top: 0px;
 }

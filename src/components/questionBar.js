@@ -14,6 +14,7 @@ export default function QuestionTab(props) {
                     <span className="author">  {props.author} <span className="time-asked">{props.time}</span></span>
                 </div>
             </div>
+
             <Button onClick={goToAnswer} className="sub-ans" size={'sm'} variant="outline-primary">Answer</Button>
         </div >
     )

@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { projectFirestore } from "../firebase/config";
 import { selectUserEmail, setUserLogOutState } from "../features/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
+import { BiLogOut } from 'react-icons/bi';
 
 export default function Profile(props) {
     const userEmailRedux = useSelector(selectUserEmail);
@@ -17,32 +18,28 @@ export default function Profile(props) {
         docRef.onSnapshot((doc) => { detail.push(doc.data()); setUserDetail(detail); })
     }
 
-    const logout = () => {
-        dispatch(setUserLogOutState());
-        props.history.push({ pathname: '/' });
-    }
+    const logout = () => { dispatch(setUserLogOutState()); props.history.push({ pathname: '/' }); }
 
     return (
         <div className="profile-page">
-            {userDetail &&
-                userDetail.map((item, index) => (
-                    <>
-                        <div className="profile-card" key={index}>
-                            <h3 className="profile-head">My Profile</h3>
-                            <img src={item.profilePic} width={90} alt="profile pic" />
-                            <h3 className="user-name">Username - {item.userName}</h3>
-                            <span className="user-id">Id- {item.userId}</span>
-                            <span className="user-email">Email - {item.userEmail}</span>
+            {userDetail.length !== 0 &&
+                <div className="profile-card">
+                    {console.log(userDetail)}
+                    <img src={userDetail[0].profilePic} width={100} alt="profile pic" />
+                    <div className="profile-sub-head">
+                        <h3 className="name">{userDetail[0].name}</h3>
+                        <span className="user-bio">"{userDetail[0].userBio}"</span>
+                        <h3 className="user-name">{userDetail[0].userName}</h3>
+                        <span className="user-email">{userDetail[0].userEmail}</span>
 
-                            <span className="user-bio">"{item.userBio}"</span>
-                            <Button onClick={logout} className="sub-ans" variant="light">Log-out</Button>
-                        </div>
-                        {/* <div className="profile-card data-card" >
-                            <h4 className="question-head">My Questions</h4>
-                            <h5>Q here is the question ?</h5>
-                        </div> */}
-                    </>
-                ))
+                        <Button size={'sm'} onClick={logout} className="sub-ans log-out" variant="light"><BiLogOut size={20} /> Log out</Button>
+                    </div>
+                </div>
+                /* <div className="profile-card data-card" >
+                    <h4 className="question-head">My Questions</h4>
+                    <h5>Q here is the question ?</h5>
+                </div> */
+
             }
         </div >
     )

@@ -8,6 +8,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { projectFirestore } from "../firebase/config";
 
 export default function SignUpPage() {
+    const [userName, setUserName] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -18,11 +19,12 @@ export default function SignUpPage() {
     const signUp = () => {
         const time = Date.now();
         const data = {
-            userName: name,
+            userName: userName,
+            name: name,
             userEmail: email,
             profilePic: userPic,
             userBio: 'Hi, I am a corniac !',
-            userId: `${name}/${time}`,
+            userId: `${userName}/${time}`,
         }
 
         if (email === '' || password === '') { alert("Please fill all the fields") }
@@ -54,15 +56,24 @@ export default function SignUpPage() {
             <div className="logger-div">
                 <h3>Sign Up</h3>
                 <Form>
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control onInputCapture={(e) => setName(e.target.value)} type="name" placeholder="John Doe" />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                    <div className="name-place">
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>Username</Form.Label>
+                            <Form.Control onInputCapture={(e) => setUserName(e.target.value)} type="name" placeholder="*Can't be changed !" />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
+                            <Form.Label>Full Name</Form.Label>
+                            <Form.Control onInputCapture={(e) => setName(e.target.value)} type="name" placeholder="John Doe" />
+                        </Form.Group>
+
+                    </div>
+
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                         <Form.Label>Email </Form.Label>
                         <Form.Control onInputCapture={(e) => setEmail(e.target.value)} type="email" placeholder="johndoe@gmail.com" />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
                         <Form.Label>Password </Form.Label>
                         <Form.Control type="name" onInputCapture={(e) => setPassword(e.target.value)} />
                         {errorLog}
