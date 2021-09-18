@@ -12,7 +12,9 @@ Cornic is an open source application. Anyone can provide and submit there ideas 
 
 1. React JS
 2. Redux JS
-3. JavaScript
-4. Firebase
-5. GitHub
+3. TypeScript
+4. Scss
+5. Bootstrap
+6. Firebase
+7. GitHub
 
