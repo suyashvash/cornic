@@ -9,8 +9,9 @@ export default function QuestionTab(props) {
 
 
     return (
-        <div className={props.profileView ? "questions profile-ques-view" : "questions"} >
-            {props.questionBar &&
+        <div className={props.profileView ? "questions profile-ques-view" : "questions"}  >
+            {
+                props.questionBar &&
                 <div className="question ">
                     {!props.profileView && <img src={props.authorPic} alt="Author Profile Pic" width={40} className="author-img" />}
                     <div className="question-author">
@@ -20,7 +21,8 @@ export default function QuestionTab(props) {
                 </div>
             }
 
-            {props.answerBar &&
+            {
+                props.answerBar &&
                 <div className="question ">
                     <div className="question-author">
                         <h4 className="question"> {props.question} </h4>
@@ -29,12 +31,13 @@ export default function QuestionTab(props) {
                 </div>
             }
 
-            <div className="ques-btn-holder">
+            <div className={props.profileView ? "ques-btn-holder profile-btn-view" : "ques-btn-holder"} >
                 <Button onClick={goToAnswer} className="sub-ans" size={'sm'} variant="outline-primary">Answer</Button>
                 {!props.profileView &&
-                    <a className="sub-ans" onClick={props.onSave}>
-                        {props.saved ? <BsFillBookmarkFill size={25} /> : <BsBookmark size={25} />}
-                    </a>
+                    <>
+                        <a className="sub-ans" onClick={props.onSave}>
+                            {props.saved ? <BsFillBookmarkFill size={25} /> : <BsBookmark size={25} />}
+                        </a></>
                 }
             </div>
 

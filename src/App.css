@@ -98,7 +98,7 @@ nav.navbar{
 
 h4.question{
   margin: 0px;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .time-asked{
@@ -373,9 +373,15 @@ margin: 10px 0px;
   }
 
   .profile-ques-view{
-    background-color: var(--base);
     margin: 0px;
-    margin-top: 20px;
+    margin-top: 10px;
+    border-bottom: 1px #3d404c solid;
+    border-radius: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
   }
 
   .answer-profile{
@@ -392,3 +398,34 @@ margin: 10px 0px;
     align-items: center;
     width: 100%;
   }
+
+  .profile-btn-view{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    width: auto;
+  }
+
+  .profile-options{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+  }
+
+
+.edit-img{
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin: auto;
+
+}
+.up-img{
+  margin: 10px;
+}
