@@ -6,18 +6,19 @@ import { useSelector } from "react-redux";
 import Button from "react-bootstrap/Button"
 import PopupModal from "./popModal";
 
-export default function MainBody(topic: any) {
+export default function MainBody(props: any) {
 
-    const [questionPack, setQuestionPack]: any = useState([]);
+    const [questionPack, setQuestionPack] = useState<any>([]);
+    const [userDetail, setUserDetail] = useState<any>([]);
+    const [savedTrigger, setSavedTrigger] = useState<boolean>(false);
+    const [show, setShow] = useState<boolean>(false);
+    const [popBody, setPopBody] = useState<string>('');
+
     const userEmailRedux: any = useSelector(selectUserEmail);
     const loggedIn: any = useSelector(selectLoggedIN);
-    const [userDetail, setUserDetail]: any = useState([]);
-    const [savedTrigger, setSavedTrigger]: any = useState(false);
-    const [show, setShow]: any = useState(false);
-
     const userRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
 
-    useEffect(() => { getQuestions(topic); getUserDetails() }, [savedTrigger])
+    useEffect(() => { getQuestions(props.topic); getUserDetails() }, [savedTrigger])
 
     const getUserDetails = () => {
         let detail: any = [];
@@ -29,8 +30,8 @@ export default function MainBody(topic: any) {
     const checkSaved = (id: any) => {
         if (loggedIn) {
             if (userDetail[0]) {
-                const checked = userDetail[0].savedQuestions.filter((item: any) => item.questionId == id)
-                return (checked.length == 0 ? false : true)
+                const checked = userDetail[0].savedQuestions.filter((item: any) => item.questionId === id)
+                return (checked.length === 0 ? false : true)
             }
         } else { return false; }
     }
@@ -38,16 +39,16 @@ export default function MainBody(topic: any) {
     const saveQuestion = (id: any, question: any) => {
         if (loggedIn) {
             if (checkSaved(id)) {
-                alert("Question is already saved ! Please remove it from Profile !")
-            } else {
+                setPopBody("Question is already saved ! Please visit profile to un-save it.");
+                setShow(true);
+            }
+            else {
                 userRef.set(
                     { savedQuestions: [...userDetail[0].savedQuestions, { questionId: id, question: question }] },
                     { merge: true })
                 setSavedTrigger(true)
             }
-        } else {
-            setShow(true)
-        }
+        } else { setPopBody("Please login before saving a Question !"); setShow(true) }
 
     }
 
@@ -56,7 +57,10 @@ export default function MainBody(topic: any) {
         const quesRef = projectFirestore.collection('questionBank')
         quesRef.orderBy("quesTime", "desc").get().then(querySnapshot => {
             querySnapshot.docs.forEach(doc => pack.push(doc.data()))
-            if (topic !== "Latest") { const packed = pack.filter((item: any) => item.userTopic === filter); setQuestionPack(packed) }
+            if (props.topic !== "Latest") {
+                const packed = pack.filter((item: any) => item.userTopic === filter);
+                setQuestionPack(packed);
+            }
             else { setQuestionPack(pack) }
         })
     }
@@ -69,10 +73,10 @@ export default function MainBody(topic: any) {
                 onHide={() => setShow(false)}
                 centered={false}
                 title={"Save Question"}
-                body={"Please Login before saving a question"}>
-                <Button className="sub-ans" variant="outline-primary" >Login</Button>
-            </PopupModal>
+                body={popBody}>
+                {!loggedIn && <Button className="sub-ans" variant="outline-primary" >Login</Button>}
 
+            </PopupModal>
 
             {
                 questionPack &&

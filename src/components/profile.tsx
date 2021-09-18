@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { projectFirestore } from "../firebase/config";
 import { selectUserEmail, setUserLogOutState } from "../features/userSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,13 +12,14 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
 export default function Profile(props: any) {
-    const userEmailRedux = useSelector(selectUserEmail);
-    const [userDetail, setUserDetail]: any = useState([]);
     const dispatch = useDispatch();
+    const userEmailRedux = useSelector(selectUserEmail);
 
-    const [show, setShow]: any = useState(false);
-    const [name, setName]: any = useState('');
-    const [bio, setBio]: any = useState('');
+    const [userDetail, setUserDetail] = useState<any>([]);
+    const [show, setShow] = useState<boolean>(false);
+    const [name, setName] = useState<string>('');
+    const [bio, setBio] = useState<string>('');
+
     const userRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
 
     useEffect(() => { getUserDetails() }, [show])

@@ -51,11 +51,11 @@ function App() {
   );
 }
 
-const Lobby = (topic: any) => {
+const Lobby = (props: any) => {
   return (
     <>
       <LeftBar />
-      <MainBody topic={topic} />
+      <MainBody topic={props.topic} />
     </>
 
   )

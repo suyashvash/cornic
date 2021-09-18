@@ -9,14 +9,16 @@ import PopupModal from "./popModal";
 
 export default function AskQuestion() {
 
-    const [topic, setTopic]: any = useState('General');
-    const [question, setQuestion]: any = useState('');
-    const [description, setDescription]: any = useState('');
-    const [show, setShow]: any = useState(false);
-    const userEmailRedux: any = useSelector(selectUserEmail);
-    const [userDetail, setUserDetail]: any = useState([]);
-    const userRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
+    const userEmailRedux = useSelector(selectUserEmail);
 
+    const [topic, setTopic] = useState<string>('General');
+    const [question, setQuestion] = useState<string>('');
+    const [description, setDescription] = useState<string>('');
+    const [show, setShow] = useState<boolean>(false);
+    const [userDetail, setUserDetail] = useState<any>([]);
+    const [popBody, setPopBody] = useState<string>('');
+
+    const userRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
 
     useEffect(() => { getUserDetails() }, [])
 
@@ -46,9 +48,9 @@ export default function AskQuestion() {
                 { myQuestions: [...userDetail[0].myQuestions, { question: question, id: `${questionId}` }] },
                 { merge: true })
 
-            setShow(true); setQuestion(''); setDescription(''); setTopic('General');
+            setPopBody("Question Submitted Successfully !"); setShow(true); setQuestion(''); setDescription(''); setTopic('General');
         }
-        else { alert("Question is Empty") }
+        else { setPopBody("Question is Empty !"); setShow(true) }
     }
 
     return (
@@ -58,7 +60,7 @@ export default function AskQuestion() {
                 onHide={() => setShow(false)}
                 centered={false}
                 title={"Question"}
-                body={"Question Submitted Succesfully !"} />
+                body={popBody} />
 
             <Form>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">

@@ -10,18 +10,23 @@ import PopupModal from "./popModal";
 export default function Answer() {
 
     const history = useHistory()
-    const [answer, setAnswer]: any = useState('');
-    const [show, setShow]: any = useState(false);
-    const [submit, setSubmit]: any = useState(false);
-    const [questionPack, setQuestionPack]: any = useState([]);
-    const [userDetail, setUserDetail]: any = useState([]);
+    const [answer, setAnswer] = useState<string>('');
+    const [show, setShow] = useState<boolean>(false);
+    const [submit, setSubmit] = useState<boolean>(false);
+    const [questionPack, setQuestionPack] = useState<any>([]);
+    const [userDetail, setUserDetail] = useState<any>([]);
+    const [popBody, setPopBody] = useState<string>('');
+
     const quesId: any = history.location.state;
     const quesRef = projectFirestore.collection('questionBank').doc(quesId)
-    const userEmailRedux: any = useSelector(selectUserEmail);
+    const userEmailRedux = useSelector(selectUserEmail);
     const userRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
-    const loggedIn: any = useSelector(selectLoggedIN);
+    const loggedIn = useSelector(selectLoggedIN);
 
-    useEffect(() => { getQuestion(); getUserDetails() }, [submit])
+    useEffect(() => {
+        getQuestion();
+        getUserDetails()
+    }, [submit])
 
     const getQuestion = () => {
         let quesPack: any = [];
@@ -42,7 +47,10 @@ export default function Answer() {
 
     const submitAnswer = () => {
         if (loggedIn) {
-            if (answer === '') { alert("Please enter a answer") }
+            if (answer === '') {
+                setPopBody("Answer can't be empty!")
+                setShow(true)
+            }
             else {
                 setSubmit(!submit)
                 quesRef.set(
@@ -52,6 +60,7 @@ export default function Answer() {
                 userRef.set(
                     { myAnswers: [...userDetail[0].myAnswers, { answer: answer, question: questionPack[0].userQuestion, id: `${questionPack[0].questionId}` }] },
                     { merge: true })
+                setPopBody("Answer Submitted Sucessfully !")
                 setShow(true)
                 setAnswer('');
             }
@@ -85,7 +94,7 @@ export default function Answer() {
                 onHide={() => setShow(false)}
                 centered={true}
                 title={"Answer"}
-                body={"Answer Submitted Succesfully !"} />
+                body={popBody} />
 
             {questionPack.length !== 0 ?
                 <>

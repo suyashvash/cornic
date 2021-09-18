@@ -8,12 +8,13 @@ import { projectFirestore } from "../firebase/config";
 import PopupModal from "./popModal"
 
 export default function SignUpPage() {
-    const [userName, setUserName]: any = useState('');
-    const [name, setName]: any = useState('');
-    const [email, setEmail]: any = useState('');
-    const [password, setPassword]: any = useState('');
-    const [errorLog, setErrorLog]: any = useState('');
-    const [show, setShow]: any = useState(false);
+    const [userName, setUserName] = useState<string>('');
+    const [name, setName] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [errorLog, setErrorLog] = useState<string>('');
+    const [show, setShow] = useState<boolean>(false);
+    const [popBody, setPopBody] = useState<string>('');
     const auth = getAuth();
 
 
@@ -34,7 +35,7 @@ export default function SignUpPage() {
             savedQuestions: savedQuestions,
         }
 
-        if (email === '' || password === '') { alert("Please fill all the fields") }
+        if (email === '' || password === '') { setPopBody("Please fill all the fields"); setShow(true) }
         else {
             createUserWithEmailAndPassword(auth, email, password)
                 .then(() => {
@@ -60,7 +61,7 @@ export default function SignUpPage() {
                 onHide={() => setShow(false)}
                 centered={true}
                 title={"Sign Up"}
-                body={"Account Created succcesfully !"} />
+                body={popBody} />
 
 
 

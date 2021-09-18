@@ -5,20 +5,22 @@ import { useState } from "react"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { setActiveUser } from "../features/userSlice";
+import PopupModal from "./popModal";
 
 export default function SignIn(props: any) {
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [errorLog, setErrorLog] = useState('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [errorLog, setErrorLog] = useState<string>('');
+    const [show, setShow] = useState<boolean>(false);
     const auth = getAuth();
     const dispatch = useDispatch();
 
     const login = () => {
-        if (email === '' || password === '') { alert("Please fill all the fields") }
+        if (email === '' || password === '') { setShow(true) }
         else {
             signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
+                .then(() => {
                     dispatch(setActiveUser({ userEmail: email, loggedIn: true, }))
                     props.history.push({ pathname: '/cornic@profile' });
                 })
@@ -28,6 +30,13 @@ export default function SignIn(props: any) {
 
     return (
         <div className="login-page">
+            <PopupModal
+                show={show}
+                onHide={() => setShow(false)}
+                centered={true}
+                title={"Sign In"}
+                body={"Please fill all the fields"} />
+
             <div className="cornic-poster">
                 <img src={logo} alt="Corinic Poster" />
                 <h3>Cornic</h3>
