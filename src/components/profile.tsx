@@ -68,14 +68,14 @@ export default function Profile(props: any) {
 
 
 
-                    <div className="profile-card">
+                    <div className="base-flex profile-card">
                         <img src={userDetail[0].profilePic} width={100} alt="profile pic" />
-                        <div className="profile-sub-head">
+                        <div className="base-flex profile-sub-head">
                             <h3 className="name">{userDetail[0].name} </h3>
                             <span className="user-bio">"{userDetail[0].userBio}"</span>
                             <h3 className="user-name">{userDetail[0].userName}</h3>
                             <span className="user-email">{userDetail[0].userEmail}</span>
-                            <div className="profile-options">
+                            <div className="base-flex profile-options">
                                 <Button size={'sm'} onClick={() => setShow(true)} className="sub-ans log-out" variant="light"><RiEdit2Fill size={20} />Edit Profile</Button>
                                 <Button size={'sm'} onClick={logout} className="sub-ans log-out" variant="light"><BiLogOut size={20} /> Log out</Button>
                             </div>

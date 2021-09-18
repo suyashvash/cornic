@@ -8,7 +8,7 @@ export default function PopupModal(props: any) {
                 <Modal.Title>{props.title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <div className="save-pop">
+                <div className="base-flex save-pop">
                     {props.body}
                     {props.children}
                 </div>

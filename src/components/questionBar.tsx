@@ -9,12 +9,12 @@ export default function QuestionTab(props: any) {
 
 
     return (
-        <div className={props.profileView ? "questions profile-ques-view" : "questions"}  >
+        <div className={props.profileView ? "base-flex questions profile-ques-view" : "base-flex questions"}  >
             {
                 props.questionBar &&
-                <div className="question ">
+                <div className="base-flex">
                     {!props.profileView && <img src={props.authorPic} alt="Author Profile Pic" width={40} className="author-img" />}
-                    <div className="question-author">
+                    <div className="base-flex question-author">
                         <h4 className="question"> {props.question} </h4>
                         {!props.profileView && <span className="author">  {props.author} <span className="time-asked">{props.time}</span></span>}
                     </div>
@@ -23,15 +23,15 @@ export default function QuestionTab(props: any) {
 
             {
                 props.answerBar &&
-                <div className="question ">
-                    <div className="question-author">
+                <div className="base-flex">
+                    <div className="base-flex question-author">
                         <h4 className="question"> {props.question} </h4>
                         <span className="answer-profile">  {props.answer}</span>
                     </div>
                 </div>
             }
 
-            <div className={props.profileView ? "ques-btn-holder profile-btn-view" : "ques-btn-holder"} >
+            <div className={props.profileView ? "base-flex ques-btn-holder profile-btn-view" : "base-flex ques-btn-holder"} >
                 <Button onClick={goToAnswer} className="sub-ans" size={'sm'} variant="outline-primary">Answer</Button>
                 {!props.profileView &&
                     <>

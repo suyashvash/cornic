@@ -16,6 +16,9 @@ export default function SignUpPage() {
     const [show, setShow] = useState<boolean>(false);
     const [popBody, setPopBody] = useState<string>('');
     const auth = getAuth();
+    const userRef = projectFirestore.collection("users");
+
+
 
 
     const signUp = () => {
@@ -35,14 +38,21 @@ export default function SignUpPage() {
             savedQuestions: savedQuestions,
         }
 
-        if (email === '' || password === '') { setPopBody("Please fill all the fields"); setShow(true) }
+        if (email === '' || password === '' || userName === '') { setPopBody("Please fill all the fields"); setShow(true) }
         else {
-            createUserWithEmailAndPassword(auth, email, password)
-                .then(() => {
-                    projectFirestore.collection("users").doc(`${email}`).set(data);
-                    setShow(true);
-                })
-                .catch((error) => { const errorMessage = error.message; setErrorLog(errorMessage) });
+            if (/\s/.test(userName)) {
+                setPopBody("Please enter a username without spaces or /"); setShow(true)
+            } else {
+                // let detail: any = [];
+                // userRef.onSnapshot((doc: any) => { detail.push(doc.data()) })
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then(() => {
+                        userRef.doc(`${email}`).set(data);
+                        setShow(true);
+                    })
+                    .catch((error) => { const errorMessage = error.message; setErrorLog(errorMessage) });
+            }
+
         }
     }
 
@@ -54,7 +64,7 @@ export default function SignUpPage() {
                 <h3>Cornic</h3>
                 <span>Ask the way you want !</span>
             </div>
-
+            {console.log(userRef.doc())}
 
             <PopupModal
                 show={show}
@@ -68,7 +78,7 @@ export default function SignUpPage() {
             <div className="logger-div">
                 <h3>Sign Up</h3>
                 <Form>
-                    <div className="name-place">
+                    <div className="base-flex name-place">
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Username</Form.Label>
                             <Form.Control onInputCapture={(e: any) => setUserName(e.target.value)} type="name" placeholder="*Can't be changed !" />

@@ -10,7 +10,7 @@ import PopupModal from "./popModal";
 export default function Answer() {
 
     const history = useHistory()
-    const [answer, setAnswer] = useState<string>('');
+    const [answer, setAnswer] = useState<any>('');
     const [show, setShow] = useState<boolean>(false);
     const [submit, setSubmit] = useState<boolean>(false);
     const [questionPack, setQuestionPack] = useState<any>([]);
@@ -68,25 +68,6 @@ export default function Answer() {
 
     }
 
-
-    const AnswerPanel = () => {
-        if (loggedIn) {
-            return (
-                <>
-                    <Form.Group className="mb-3 sub-ans-holder" controlId="exampleForm.ControlTextarea1">
-                        <Form.Label>Your Answer</Form.Label>
-                        <Form.Control value={answer} onInputCapture={(e: any) => setAnswer(e.target.value)} as="textarea" rows={3} placeholder={"My answer is ..."} />
-                    </Form.Group>
-                    <Button onClick={submitAnswer} className="sub-ans" variant="outline-primary" >Submit</Button>
-                </>
-            )
-        } else {
-            return (
-                <Button className="sub-ans" onClick={loginRedirect} variant="outline-primary" >Login to answer</Button>
-            )
-        }
-    }
-
     return (
         <div className="ask-question-page">
             <PopupModal
@@ -101,14 +82,14 @@ export default function Answer() {
                     <Form>
                         <div className="question-list">
                             <h2 className="question-asked">{questionPack[0].userQuestion}</h2>
-                            <div className="ques-detail-holder"> <p>Asked by - {questionPack[0].author}</p> <p>Asked on -{questionPack[0].quesTime}</p>  <p>Topic -{questionPack[0].userTopic}</p>   </div>
+                            <div className="base-flex ques-detail-holder"> <p>Asked by - {questionPack[0].author}</p> <p>Asked on -{questionPack[0].quesTime}</p>  <p>Topic -{questionPack[0].userTopic}</p>   </div>
                             <p >{questionPack[0].questionDesc} </p>
                         </div>
                         <div className="answer-list" >
                             <h5 className="answer-head">Answers</h5>
                             {questionPack[0].answers &&
                                 questionPack[0].answers.map((item: any, index: any) => (
-                                    <div className="answer-holder" key={index} >
+                                    <div className="base-flex answer-holder" key={index} >
                                         <p>{item.answer} </p>
                                         <p className="answer-author">{item.by} </p>
                                     </div>
@@ -116,13 +97,23 @@ export default function Answer() {
                             }
                         </div>
 
-
                         <div className="give-answer" >
-                            <AnswerPanel />
+                            {loggedIn ?
+                                <>
+                                    <Form.Group className="mb-3 sub-ans-holder" controlId="exampleForm.ControlTextarea1">
+                                        <Form.Label>Your Answer</Form.Label>
+                                        <Form.Control value={answer} onInputCapture={(e: any) => setAnswer(e.target.value)} as="textarea" rows={3} placeholder={"My answer is ..."} />
+                                    </Form.Group>
+                                    <Button onClick={submitAnswer} className="sub-ans" variant="outline-primary" >Submit</Button>
+                                </>
+                                :
+                                <Button className="sub-ans" onClick={loginRedirect} variant="outline-primary" >Login to answer</Button>
+                            }
+
                         </div >
                     </Form>
                 </> : <></>
             }
-        </div>
+        </div >
     )
 }
