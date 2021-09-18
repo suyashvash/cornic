@@ -29,7 +29,7 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-color: white;
+
 }
 
 .left-bar{
@@ -90,6 +90,7 @@ background-color: var(--second-base);
 width: 80%;
 margin: auto;
 margin-top: 20px;
+color: white;
 }
 
 h4.question{
@@ -160,7 +161,12 @@ font-size: 18px;
 margin-left: 0px;
 }
 
-.logger-div{ width: 40%;}
+.logger-div{ 
+  width: 40%;
+    .signup-mb3{
+      margin: 0px;
+    }
+}
 
 .sub-ans>a{
 width: 100%;
@@ -178,6 +184,11 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 
+}
+
+form.profile-edit-pop{
+  width: 90%;
+  margin: auto;
 }
 
 .profile-card{

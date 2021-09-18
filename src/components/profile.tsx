@@ -49,10 +49,10 @@ export default function Profile(props: any) {
             {userDetail.length !== 0 &&
                 <>
                     <PopupModal show={show} onHide={() => setShow(false)} centered={true} title={"Edit Profile"}>
-                        <Form>
+                        <Form className="profile-edit-pop">
                             <div className="edit-img">
                                 <img src={userDetail[0].profilePic} width={100} alt="profile pic" />
-                                <Button size={'sm'} className="up-img" variant="primary">Upload</Button>
+                                {/* <Button size={'sm'} className="up-img" variant="primary">Upload</Button> */}
                             </div >
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Your Name </Form.Label>

@@ -2,7 +2,7 @@ import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import logo from '../assets/logo.png'
 import userPic from '../assets/user.png'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { projectFirestore } from "../firebase/config";
 import PopupModal from "./popModal"
@@ -15,10 +15,24 @@ export default function SignUpPage() {
     const [errorLog, setErrorLog] = useState<string>('');
     const [show, setShow] = useState<boolean>(false);
     const [popBody, setPopBody] = useState<string>('');
+    const [userList, setUserList] = useState<any>([]);
     const auth = getAuth();
     const userRef = projectFirestore.collection("users");
 
+    useEffect(() => {
+        getUserName()
+    }, [])
 
+
+    const getUserName = () => {
+        let detail: any = [];
+        userRef.get().then((querySnapshot: any) => {
+            querySnapshot.docs.forEach((doc: any) => detail.push(doc.data()))
+        })
+        setUserList(detail)
+
+
+    }
 
 
     const signUp = () => {
@@ -27,7 +41,7 @@ export default function SignUpPage() {
         const myQuestions: any = [];
         const savedQuestions: any = [];
         const data = {
-            userName: userName,
+            userName: userName.toLowerCase(),
             name: name,
             userEmail: email,
             profilePic: userPic,
@@ -43,14 +57,21 @@ export default function SignUpPage() {
             if (/\s/.test(userName)) {
                 setPopBody("Please enter a username without spaces or /"); setShow(true)
             } else {
-                // let detail: any = [];
-                // userRef.onSnapshot((doc: any) => { detail.push(doc.data()) })
-                createUserWithEmailAndPassword(auth, email, password)
-                    .then(() => {
-                        userRef.doc(`${email}`).set(data);
-                        setShow(true);
-                    })
-                    .catch((error) => { const errorMessage = error.message; setErrorLog(errorMessage) });
+
+                const filter = userList.filter((item: any) => item.userName === userName.toLowerCase())
+                if (filter.length === 0) {
+                    createUserWithEmailAndPassword(auth, email, password)
+                        .then(() => {
+                            userRef.doc(`${email}`).set(data);
+                            setShow(true);
+                        })
+                        .catch((error) => { const errorMessage = error.message; setErrorLog(errorMessage) });
+
+                } else {
+                    setErrorLog("Username already exists")
+                }
+
+
             }
 
         }
@@ -64,7 +85,8 @@ export default function SignUpPage() {
                 <h3>Cornic</h3>
                 <span>Ask the way you want !</span>
             </div>
-            {console.log(userRef.doc())}
+
+
 
             <PopupModal
                 show={show}
@@ -91,7 +113,7 @@ export default function SignUpPage() {
 
                     </div>
 
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+                    <Form.Group className="mb-3 signup-mb3" controlId="exampleForm.ControlInput2">
                         <Form.Label>Email </Form.Label>
                         <Form.Control onInputCapture={(e: any) => setEmail(e.target.value)} type="email" placeholder="johndoe@gmail.com" />
                     </Form.Group>

@@ -31,7 +31,6 @@ function App() {
         <NavBar />
         <div className="App-body">
           <Switch>
-
             <Route path="/" exact component={() => <Lobby topic="Latest" />} />
             <Route path="/cornic@general" exact component={() => <Lobby topic="General" />} />
             <Route path="/cornic@anime" exact component={() => <Lobby topic="Anime" />} />
