@@ -6,9 +6,8 @@ import Button from "react-bootstrap/Button";
 import { BiLogOut } from 'react-icons/bi';
 import { RiEdit2Fill } from 'react-icons/ri';
 import QuestionTab from "./questionBar";
-import Modal from 'react-bootstrap/Modal';
+import PopupModal from "./popModal";
 import Form from "react-bootstrap/Form"
-
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
@@ -48,32 +47,25 @@ export default function Profile(props) {
         <div className="profile-page">
             {userDetail.length !== 0 &&
                 <>
+                    <PopupModal show={show} onHide={() => setShow(false)} centered={true} title={"Edit Profile"}>
+                        <Form>
+                            <div className="edit-img">
+                                <img src={userDetail[0].profilePic} width={100} alt="profile pic" />
+                                <Button size={'sm'} className="up-img" variant="primary">Upload</Button>
+                            </div >
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Your Name </Form.Label>
+                                <Form.Control value={name} onInputCapture={(e) => setName(e.target.value)} type="name" placeholder={userDetail[0].name} />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                                <Form.Label>Your Bio</Form.Label>
+                                <Form.Control value={bio} onInputCapture={(e) => setBio(e.target.value)} as="textarea" rows={3} placeholder={userDetail[0].userBio} />
+                            </Form.Group>
+                            <Button size={'sm'} onClick={saveProfile} className="sub-ans log-out" variant="primary">Save Profile</Button>
+                        </Form>
+                    </PopupModal>
 
-                    <Modal show={show} onHide={() => setShow(false)} centered>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Edit Profile</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <Form>
-                                <div className="edit-img">
-                                    <img src={userDetail[0].profilePic} width={100} alt="profile pic" />
-                                    <Button size={'sm'} className="up-img" variant="primary">Upload</Button>
-                                </div >
 
-                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                    <Form.Label>Your Name </Form.Label>
-                                    <Form.Control value={name} onInputCapture={(e) => setName(e.target.value)} type="name" placeholder={userDetail[0].name} />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                                    <Form.Label>Your Bio</Form.Label>
-                                    <Form.Control value={bio} onInputCapture={(e) => setBio(e.target.value)} as="textarea" rows={3} placeholder={userDetail[0].userBio} />
-                                </Form.Group>
-                                <Button size={'sm'} onClick={saveProfile} className="sub-ans log-out" variant="primary">Save Profile</Button>
-
-                            </Form>
-
-                        </Modal.Body>
-                    </Modal>
 
                     <div className="profile-card">
                         <img src={userDetail[0].profilePic} width={100} alt="profile pic" />

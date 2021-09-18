@@ -5,7 +5,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import { projectFirestore } from "../firebase/config";
 import { selectUserEmail } from "../features/userSlice";
 import { useSelector } from "react-redux";
-import Modal from 'react-bootstrap/Modal'
+import PopupModal from "./popModal";
 
 export default function AskQuestion() {
 
@@ -53,12 +53,13 @@ export default function AskQuestion() {
 
     return (
         <div className="ask-question-page">
-            <Modal show={show} onHide={() => setShow(false)} centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>Question</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Question Submitted Succesfully !</Modal.Body>
-            </Modal>
+            <PopupModal
+                show={show}
+                onHide={() => setShow(false)}
+                centered={false}
+                title={"Question"}
+                body={"Question Submitted Succesfully !"} />
+
             <Form>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Your Question </Form.Label>

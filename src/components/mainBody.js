@@ -3,8 +3,8 @@ import { projectFirestore } from "../firebase/config";
 import { useEffect, useState } from "react";
 import { selectUserEmail, selectLoggedIN } from "../features/userSlice";
 import { useSelector } from "react-redux";
-
-
+import Button from "react-bootstrap/Button"
+import PopupModal from "./popModal";
 
 export default function MainBody({ topic }) {
 
@@ -13,6 +13,7 @@ export default function MainBody({ topic }) {
     const loggedIn = useSelector(selectLoggedIN);
     const [userDetail, setUserDetail] = useState([]);
     const [savedTrigger, setSavedTrigger] = useState(false);
+    const [show, setShow] = useState(false);
 
     const userRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
 
@@ -45,7 +46,7 @@ export default function MainBody({ topic }) {
                 setSavedTrigger(true)
             }
         } else {
-            alert("Please Login before saving a Question")
+            setShow(true)
         }
 
     }
@@ -62,6 +63,17 @@ export default function MainBody({ topic }) {
 
     return (
         <div className="MainBody">
+
+            <PopupModal
+                show={show}
+                onHide={() => setShow(false)}
+                centered={false}
+                title={"Save Question"}
+                body={"Please Login before saving a question"}>
+                <Button className="sub-ans" variant="outline-primary" >Login</Button>
+            </PopupModal>
+
+
             {questionPack &&
                 questionPack.map((item, index) => (
                     < QuestionTab

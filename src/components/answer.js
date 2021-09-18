@@ -2,10 +2,10 @@ import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import { useEffect, useState } from "react";
 import { projectFirestore } from "../firebase/config";
-import Modal from 'react-bootstrap/Modal'
 import { useHistory } from "react-router-dom";
 import { selectUserEmail, selectLoggedIN } from "../features/userSlice";
 import { useSelector } from "react-redux";
+import PopupModal from "./popModal";
 
 export default function Answer(props) {
 
@@ -61,12 +61,14 @@ export default function Answer(props) {
 
     return (
         <div className="ask-question-page">
-            <Modal show={show} onHide={() => setShow(false)} centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>Answer</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Answer Submitted Succesfully !</Modal.Body>
-            </Modal>
+
+            <PopupModal
+                show={show}
+                onHide={() => setShow(false)}
+                centered={true}
+                title={"Answer"}
+                body={"Answer Submitted Succesfully !"} />
+
 
             {questionPack.length !== 0 ?
                 <>
@@ -101,8 +103,7 @@ export default function Answer(props) {
                                     </>
                                     :
                                     <>
-                                        <h5>Login to post your answer</h5>
-                                        <Button className="sub-ans" onClick={loginRedirect} variant="outline-primary" >Log In</Button>
+                                        <Button className="sub-ans" onClick={loginRedirect} variant="outline-primary" >Login to answer</Button>
                                     </>
                             }
                         </div >

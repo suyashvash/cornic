@@ -1,11 +1,11 @@
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
-import Modal from 'react-bootstrap/Modal'
 import logo from '../assets/logo.png'
 import userPic from '../assets/user.png'
 import { useState } from "react"
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { projectFirestore } from "../firebase/config";
+import PopupModal from "./popModal"
 
 export default function SignUpPage() {
     const [userName, setUserName] = useState('');
@@ -54,12 +54,17 @@ export default function SignUpPage() {
                 <h3>Cornic</h3>
                 <span>Ask the way you want !</span>
             </div>
-            <Modal show={show} onHide={() => setShow(false)} centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>Sign Up</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Account Created succcesfully !</Modal.Body>
-            </Modal>
+
+
+            <PopupModal
+                show={show}
+                onHide={() => setShow(false)}
+                centered={true}
+                title={"Sign Up"}
+                body={"Account Created succcesfully !"} />
+
+
+
             <div className="logger-div">
                 <h3>Sign Up</h3>
                 <Form>
