@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { projectFirestore } from "../firebase/config";
 import Modal from 'react-bootstrap/Modal'
 import { useHistory } from "react-router-dom";
-import { selectUserEmail } from "../features/userSlice";
+import { selectUserEmail, selectLoggedIN } from "../features/userSlice";
 import { useSelector } from "react-redux";
 
 export default function Answer(props) {
@@ -19,6 +19,7 @@ export default function Answer(props) {
     const quesRef = projectFirestore.collection('questionBank').doc(quesId)
     const userEmailRedux = useSelector(selectUserEmail);
     const userRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
+    const loggedIn = useSelector(selectLoggedIN);
 
     useEffect(() => { getQuestion(); getUserDetails() }, [submit])
 
@@ -28,24 +29,34 @@ export default function Answer(props) {
     }
 
     const getUserDetails = () => {
-        let detail = [];
-        userRef.onSnapshot((doc) => { detail.push(doc.data()); setUserDetail(detail) })
+        if (loggedIn) {
+            let detail = [];
+            userRef.onSnapshot((doc) => { detail.push(doc.data()); setUserDetail(detail) })
+        }
+
+    }
+
+    const loginRedirect = () => {
+        history.push({ pathname: '/cornic@userlogin' })
     }
 
     const submitAnswer = () => {
-        if (answer === '') { alert("Please enter a answer") }
-        else {
-            setSubmit(!submit)
-            quesRef.set(
-                { answers: [...questionPack[0].answers, { answer: answer, by: `${userEmailRedux}` }] },
-                { merge: true })
+        if (loggedIn) {
+            if (answer === '') { alert("Please enter a answer") }
+            else {
+                setSubmit(!submit)
+                quesRef.set(
+                    { answers: [...questionPack[0].answers, { answer: answer, by: `${userEmailRedux}` }] },
+                    { merge: true })
 
-            userRef.set(
-                { myAnswers: [...userDetail[0].myAnswers, { answer: answer, question: questionPack[0].userQuestion, id: `${questionPack[0].questionId}` }] },
-                { merge: true })
-            setShow(true)
-            setAnswer('');
+                userRef.set(
+                    { myAnswers: [...userDetail[0].myAnswers, { answer: answer, question: questionPack[0].userQuestion, id: `${questionPack[0].questionId}` }] },
+                    { merge: true })
+                setShow(true)
+                setAnswer('');
+            }
         }
+
     }
 
     return (
@@ -76,12 +87,29 @@ export default function Answer(props) {
                                 ))
                             }
                         </div>
-                        <Form.Group className="mb-3 sub-ans-holder" controlId="exampleForm.ControlTextarea1">
-                            <Form.Label>Your Answer</Form.Label>
-                            <Form.Control value={answer} onInputCapture={(e) => setAnswer(e.target.value)} as="textarea" rows={3} placeholder={"My answer is ..."} />
-                        </Form.Group>
+
+
+                        <div className="give-answer" >
+                            {
+                                loggedIn ?
+                                    <>
+                                        <Form.Group className="mb-3 sub-ans-holder" controlId="exampleForm.ControlTextarea1">
+                                            <Form.Label>Your Answer</Form.Label>
+                                            <Form.Control disabled={!loggedIn} value={answer} onInputCapture={(e) => setAnswer(e.target.value)} as="textarea" rows={3} placeholder={"My answer is ..."} />
+                                        </Form.Group>
+                                        <Button disabled={!loggedIn} onClick={submitAnswer} className="sub-ans" variant="outline-primary" >Submit</Button>
+                                    </>
+                                    :
+                                    <>
+                                        <h5>Login to post your answer</h5>
+                                        <Button className="sub-ans" onClick={loginRedirect} variant="outline-primary" >Log In</Button>
+                                    </>
+                            }
+                        </div >
+
+
                     </Form>
-                    <Button onClick={submitAnswer} className="sub-ans" variant="outline-primary" >Submit</Button>
+
                 </> : <></>
             }
         </div>

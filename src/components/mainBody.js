@@ -27,12 +27,11 @@ export default function MainBody({ topic }) {
 
     const checkSaved = (id) => {
         if (loggedIn) {
-            const check = userDetail[0].savedQuestions
-            const checked = check.filter((item) => item.questionId == id)
-            return (checked.length == 0 ? false : true)
-        } else {
-            return false;
-        }
+            if (userDetail[0]) {
+                const checked = userDetail[0].savedQuestions.filter((item) => item.questionId == id)
+                return (checked.length == 0 ? false : true)
+            }
+        } else { return false; }
     }
 
     const saveQuestion = (id, question) => {
