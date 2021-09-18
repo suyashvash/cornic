@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { BsBookmark, BsFillBookmarkFill } from 'react-icons/bs';
 
 
-export default function QuestionTab(props) {
+export default function QuestionTab(props: any) {
     const history = useHistory()
     const goToAnswer = () => { history.push({ pathname: '/cornic@postAnswer', state: props.questionId }); }
 

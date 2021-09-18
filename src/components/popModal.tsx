@@ -1,7 +1,7 @@
 
 import Modal from 'react-bootstrap/Modal'
 
-export default function PopupModal(props) {
+export default function PopupModal(props: any) {
     return (
         <Modal show={props.show} onHide={props.onHide} centered={props.centered}>
             <Modal.Header closeButton>

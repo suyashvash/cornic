@@ -18,7 +18,7 @@ import SignUpPage from './components/signUP';
 
 
 import { useSelector } from "react-redux";
-import { selectLoggedIN } from "../src/features/userSlice";
+import { selectLoggedIN } from "./features/userSlice";
 
 function App() {
   const loggedIn = useSelector(selectLoggedIN);
@@ -39,11 +39,11 @@ function App() {
             <Route path="/cornic@programming" exact component={() => <Lobby topic="Programming" />} />
             <Route path="/cornic@movies" exact component={() => <Lobby topic="Movies" />} />
             <Route path="/cornic@studies" exact component={() => <Lobby topic="Studies" />} />
-            <Route path="/cornic@profile" exact component={(props) => <Profile  {...props} />} />
-            <Route path="/cornic@userlogin" exact component={(props) => loggedIn ? <Profile /> : <SignIn {...props} />} />
+            <Route path="/cornic@profile" exact component={(props: any) => <Profile  {...props} />} />
+            <Route path="/cornic@userlogin" exact component={(props: any) => loggedIn ? <Profile /> : <SignIn {...props} />} />
             <Route path="/cornic@signup" exact component={() => loggedIn ? <Profile /> : <SignUpPage />} />
-            <Route path="/cornic@ask" exact component={(props) => loggedIn ? <AskQuestion /> : <SignIn {...props} />} />
-            <Route path="/cornic@postAnswer" exact component={(props) => <Answer />} />
+            <Route path="/cornic@ask" exact component={(props: any) => loggedIn ? <AskQuestion /> : <SignIn {...props} />} />
+            <Route path="/cornic@postAnswer" exact component={() => <Answer />} />
           </Switch>
         </div>
       </Router>
@@ -51,7 +51,7 @@ function App() {
   );
 }
 
-const Lobby = ({ topic }) => {
+const Lobby = (topic: any) => {
   return (
     <>
       <LeftBar />

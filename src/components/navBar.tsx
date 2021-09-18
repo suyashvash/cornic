@@ -12,9 +12,6 @@ import { Link } from 'react-router-dom'
 
 export default function NavBar() {
     const loggedIn = useSelector(selectLoggedIN);
-
-
-
     return (
         <Navbar bg="dark" variant="dark">
             <Container>

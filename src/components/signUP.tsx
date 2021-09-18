@@ -8,20 +8,20 @@ import { projectFirestore } from "../firebase/config";
 import PopupModal from "./popModal"
 
 export default function SignUpPage() {
-    const [userName, setUserName] = useState('');
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [errorLog, setErrorLog] = useState('');
-    const [show, setShow] = useState(false);
+    const [userName, setUserName]: any = useState('');
+    const [name, setName]: any = useState('');
+    const [email, setEmail]: any = useState('');
+    const [password, setPassword]: any = useState('');
+    const [errorLog, setErrorLog]: any = useState('');
+    const [show, setShow]: any = useState(false);
     const auth = getAuth();
 
 
     const signUp = () => {
         const time = Date.now();
-        const myAnswers = [];
-        const myQuestions = [];
-        const savedQuestions = [];
+        const myAnswers: any = [];
+        const myQuestions: any = [];
+        const savedQuestions: any = [];
         const data = {
             userName: userName,
             name: name,
@@ -37,12 +37,11 @@ export default function SignUpPage() {
         if (email === '' || password === '') { alert("Please fill all the fields") }
         else {
             createUserWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
+                .then(() => {
                     projectFirestore.collection("users").doc(`${email}`).set(data);
                     setShow(true);
                 })
-                .catch((error) => { const errorCode = error.code; const errorMessage = error.message; setErrorLog(errorMessage) });
+                .catch((error) => { const errorMessage = error.message; setErrorLog(errorMessage) });
         }
     }
 
@@ -71,23 +70,23 @@ export default function SignUpPage() {
                     <div className="name-place">
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Username</Form.Label>
-                            <Form.Control onInputCapture={(e) => setUserName(e.target.value)} type="name" placeholder="*Can't be changed !" />
+                            <Form.Control onInputCapture={(e: any) => setUserName(e.target.value)} type="name" placeholder="*Can't be changed !" />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
                             <Form.Label>Full Name</Form.Label>
-                            <Form.Control onInputCapture={(e) => setName(e.target.value)} type="name" placeholder="John Doe" />
+                            <Form.Control onInputCapture={(e: any) => setName(e.target.value)} type="name" placeholder="John Doe" />
                         </Form.Group>
 
                     </div>
 
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                         <Form.Label>Email </Form.Label>
-                        <Form.Control onInputCapture={(e) => setEmail(e.target.value)} type="email" placeholder="johndoe@gmail.com" />
+                        <Form.Control onInputCapture={(e: any) => setEmail(e.target.value)} type="email" placeholder="johndoe@gmail.com" />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
                         <Form.Label>Password </Form.Label>
-                        <Form.Control type="name" onInputCapture={(e) => setPassword(e.target.value)} />
+                        <Form.Control type="name" onInputCapture={(e: any) => setPassword(e.target.value)} />
                         {errorLog}
                     </Form.Group>
                     <Button className="sub-ans" variant="outline-primary" onClick={signUp} >Sign Up</Button>

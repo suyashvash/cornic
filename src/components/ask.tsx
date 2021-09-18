@@ -9,24 +9,24 @@ import PopupModal from "./popModal";
 
 export default function AskQuestion() {
 
-    const [topic, setTopic] = useState('General');
-    const [question, setQuestion] = useState('');
-    const [description, setDescription] = useState('');
-    const [show, setShow] = useState(false);
-    const userEmailRedux = useSelector(selectUserEmail);
-    const [userDetail, setUserDetail] = useState([]);
+    const [topic, setTopic]: any = useState('General');
+    const [question, setQuestion]: any = useState('');
+    const [description, setDescription]: any = useState('');
+    const [show, setShow]: any = useState(false);
+    const userEmailRedux: any = useSelector(selectUserEmail);
+    const [userDetail, setUserDetail]: any = useState([]);
     const userRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
 
 
     useEffect(() => { getUserDetails() }, [])
 
     const getUserDetails = () => {
-        let detail = []; userRef.onSnapshot((doc) => { detail.push(doc.data()); setUserDetail(detail) })
+        let detail: any = []; userRef.onSnapshot((doc) => { detail.push(doc.data()); setUserDetail(detail) })
     }
 
     const submitQuestion = () => {
         if (question !== '') {
-            let answers = [];
+            let answers: any = [];
             const time = Date.now();
             const questionId = `${userDetail[0].userName}.${time}`
             const data = {
@@ -63,11 +63,11 @@ export default function AskQuestion() {
             <Form>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Your Question </Form.Label>
-                    <Form.Control value={question} onInputCapture={(e) => setQuestion(e.target.value)} type="name" placeholder="What is capital of India ?" />
+                    <Form.Control value={question} onInputCapture={(e: any) => setQuestion(e.target.value)} type="name" placeholder="What is capital of India ?" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                     <Form.Label>Description [Optional ]</Form.Label>
-                    <Form.Control value={description} onInputCapture={(e) => setDescription(e.target.value)} as="textarea" rows={3} placeholder={"I think it is jaipur ! but I am not Confirmed "} />
+                    <Form.Control value={description} onInputCapture={(e: any) => setDescription(e.target.value)} as="textarea" rows={3} placeholder={"I think it is jaipur ! but I am not Confirmed "} />
                 </Form.Group>
                 <Dropdown>
                     <Dropdown.Toggle variant="primary" id="dropdown-basic"> Topic</Dropdown.Toggle>

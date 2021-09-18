@@ -7,30 +7,30 @@ import { selectUserEmail, selectLoggedIN } from "../features/userSlice";
 import { useSelector } from "react-redux";
 import PopupModal from "./popModal";
 
-export default function Answer(props) {
+export default function Answer() {
 
     const history = useHistory()
-    const [answer, setAnswer] = useState('');
-    const [show, setShow] = useState(false);
-    const [submit, setSubmit] = useState(false);
-    const [questionPack, setQuestionPack] = useState([]);
-    const [userDetail, setUserDetail] = useState([]);
-    const quesId = history.location.state;
+    const [answer, setAnswer]: any = useState('');
+    const [show, setShow]: any = useState(false);
+    const [submit, setSubmit]: any = useState(false);
+    const [questionPack, setQuestionPack]: any = useState([]);
+    const [userDetail, setUserDetail]: any = useState([]);
+    const quesId: any = history.location.state;
     const quesRef = projectFirestore.collection('questionBank').doc(quesId)
-    const userEmailRedux = useSelector(selectUserEmail);
+    const userEmailRedux: any = useSelector(selectUserEmail);
     const userRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
-    const loggedIn = useSelector(selectLoggedIN);
+    const loggedIn: any = useSelector(selectLoggedIN);
 
     useEffect(() => { getQuestion(); getUserDetails() }, [submit])
 
     const getQuestion = () => {
-        let quesPack = [];
+        let quesPack: any = [];
         quesRef.onSnapshot((doc) => { quesPack.push(doc.data()); setQuestionPack(quesPack) })
     }
 
     const getUserDetails = () => {
         if (loggedIn) {
-            let detail = [];
+            let detail: any = [];
             userRef.onSnapshot((doc) => { detail.push(doc.data()); setUserDetail(detail) })
         }
 
@@ -59,16 +59,33 @@ export default function Answer(props) {
 
     }
 
+
+    const AnswerPanel = () => {
+        if (loggedIn) {
+            return (
+                <>
+                    <Form.Group className="mb-3 sub-ans-holder" controlId="exampleForm.ControlTextarea1">
+                        <Form.Label>Your Answer</Form.Label>
+                        <Form.Control value={answer} onInputCapture={(e: any) => setAnswer(e.target.value)} as="textarea" rows={3} placeholder={"My answer is ..."} />
+                    </Form.Group>
+                    <Button onClick={submitAnswer} className="sub-ans" variant="outline-primary" >Submit</Button>
+                </>
+            )
+        } else {
+            return (
+                <Button className="sub-ans" onClick={loginRedirect} variant="outline-primary" >Login to answer</Button>
+            )
+        }
+    }
+
     return (
         <div className="ask-question-page">
-
             <PopupModal
                 show={show}
                 onHide={() => setShow(false)}
                 centered={true}
                 title={"Answer"}
                 body={"Answer Submitted Succesfully !"} />
-
 
             {questionPack.length !== 0 ?
                 <>
@@ -81,7 +98,7 @@ export default function Answer(props) {
                         <div className="answer-list" >
                             <h5 className="answer-head">Answers</h5>
                             {questionPack[0].answers &&
-                                questionPack[0].answers.map((item, index) => (
+                                questionPack[0].answers.map((item: any, index: any) => (
                                     <div className="answer-holder" key={index} >
                                         <p>{item.answer} </p>
                                         <p className="answer-author">{item.by} </p>
@@ -92,25 +109,9 @@ export default function Answer(props) {
 
 
                         <div className="give-answer" >
-                            {
-                                loggedIn ?
-                                    <>
-                                        <Form.Group className="mb-3 sub-ans-holder" controlId="exampleForm.ControlTextarea1">
-                                            <Form.Label>Your Answer</Form.Label>
-                                            <Form.Control disabled={!loggedIn} value={answer} onInputCapture={(e) => setAnswer(e.target.value)} as="textarea" rows={3} placeholder={"My answer is ..."} />
-                                        </Form.Group>
-                                        <Button disabled={!loggedIn} onClick={submitAnswer} className="sub-ans" variant="outline-primary" >Submit</Button>
-                                    </>
-                                    :
-                                    <>
-                                        <Button className="sub-ans" onClick={loginRedirect} variant="outline-primary" >Login to answer</Button>
-                                    </>
-                            }
+                            <AnswerPanel />
                         </div >
-
-
                     </Form>
-
                 </> : <></>
             }
         </div>

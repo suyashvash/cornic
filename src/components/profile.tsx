@@ -11,20 +11,20 @@ import Form from "react-bootstrap/Form"
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
-export default function Profile(props) {
+export default function Profile(props: any) {
     const userEmailRedux = useSelector(selectUserEmail);
-    const [userDetail, setUserDetail] = useState([]);
+    const [userDetail, setUserDetail]: any = useState([]);
     const dispatch = useDispatch();
 
-    const [show, setShow] = useState(false);
-    const [name, setName] = useState('');
-    const [bio, setBio] = useState('');
+    const [show, setShow]: any = useState(false);
+    const [name, setName]: any = useState('');
+    const [bio, setBio]: any = useState('');
     const userRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
 
     useEffect(() => { getUserDetails() }, [show])
 
     const getUserDetails = () => {
-        let detail = [];
+        let detail: any = [];
         userRef.onSnapshot((doc) => { detail.push(doc.data()); setUserDetail(detail); })
         if (userDetail.length !== 0) { setName(userDetail[0].name); setBio(userDetail[0].userBio) }
 
@@ -55,11 +55,11 @@ export default function Profile(props) {
                             </div >
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Your Name </Form.Label>
-                                <Form.Control value={name} onInputCapture={(e) => setName(e.target.value)} type="name" placeholder={userDetail[0].name} />
+                                <Form.Control value={name} onInputCapture={(e: any) => setName(e.target.value)} type="name" placeholder={userDetail[0].name} />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                                 <Form.Label>Your Bio</Form.Label>
-                                <Form.Control value={bio} onInputCapture={(e) => setBio(e.target.value)} as="textarea" rows={3} placeholder={userDetail[0].userBio} />
+                                <Form.Control value={bio} onInputCapture={(e: any) => setBio(e.target.value)} as="textarea" rows={3} placeholder={userDetail[0].userBio} />
                             </Form.Group>
                             <Button size={'sm'} onClick={saveProfile} className="sub-ans log-out" variant="primary">Save Profile</Button>
                         </Form>
@@ -91,7 +91,7 @@ export default function Profile(props) {
                                 </TabList>
                                 <TabPanel>
                                     {userDetail[0].myQuestions &&
-                                        userDetail[0].myQuestions.map((item, index) => (
+                                        userDetail[0].myQuestions.map((item: any, index: any) => (
                                             <QuestionTab
                                                 key={index}
                                                 questionBar={true}
@@ -108,7 +108,7 @@ export default function Profile(props) {
                                 </TabPanel>
                                 <TabPanel>
                                     {userDetail[0].myAnswers &&
-                                        userDetail[0].myAnswers.map((item, index) => (
+                                        userDetail[0].myAnswers.map((item: any, index: any) => (
                                             <QuestionTab
                                                 key={index}
                                                 profileView={true}
@@ -123,7 +123,7 @@ export default function Profile(props) {
                                 <TabPanel>
                                     {userDetail[0].savedQuestions &&
                                         userDetail[0].savedQuestions
-                                            .map((item, index) => (
+                                            .map((item: any, index: any) => (
                                                 <QuestionTab
                                                     key={index}
                                                     questionBar={true}

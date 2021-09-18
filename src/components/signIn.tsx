@@ -3,31 +3,26 @@ import Button from "react-bootstrap/Button"
 import logo from '../assets/logo.png'
 import { useState } from "react"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useDispatch, useSelector } from "react-redux";
-import { setActiveUser, selectUserEmail } from "../features/userSlice";
+import { useDispatch } from "react-redux";
+import { setActiveUser } from "../features/userSlice";
 
-export default function SignIn(props) {
+export default function SignIn(props: any) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorLog, setErrorLog] = useState('');
     const auth = getAuth();
     const dispatch = useDispatch();
-    const userEmail = useSelector(selectUserEmail);
 
     const login = () => {
         if (email === '' || password === '') { alert("Please fill all the fields") }
         else {
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
-                    const user = userCredential.user;
-                    dispatch(setActiveUser({
-                        userEmail: email,
-                        loggedIn: true,
-                    }))
+                    dispatch(setActiveUser({ userEmail: email, loggedIn: true, }))
                     props.history.push({ pathname: '/cornic@profile' });
                 })
-                .catch((error) => { const errorCode = error.code; setErrorLog(error.message) });
+                .catch((error) => { setErrorLog(error.message) });
         }
     }
 
@@ -43,11 +38,11 @@ export default function SignIn(props) {
                 <Form>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control onInputCapture={(e) => setEmail(e.target.value)} type="email" placeholder="John Doe" />
+                        <Form.Control onInputCapture={(e: any) => setEmail(e.target.value)} type="email" placeholder="John Doe" />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>Password </Form.Label>
-                        <Form.Control onInputCapture={(e) => setPassword(e.target.value)} type="password" placeholder="****" />
+                        <Form.Control onInputCapture={(e: any) => setPassword(e.target.value)} type="password" placeholder="****" />
                         {errorLog}
                     </Form.Group>
                     <Button onClick={login} className="sub-ans" variant="outline-primary" >Login</Button>

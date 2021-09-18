@@ -6,36 +6,36 @@ import { useSelector } from "react-redux";
 import Button from "react-bootstrap/Button"
 import PopupModal from "./popModal";
 
-export default function MainBody({ topic }) {
+export default function MainBody(topic: any) {
 
-    const [questionPack, setQuestionPack] = useState([]);
-    const userEmailRedux = useSelector(selectUserEmail);
-    const loggedIn = useSelector(selectLoggedIN);
-    const [userDetail, setUserDetail] = useState([]);
-    const [savedTrigger, setSavedTrigger] = useState(false);
-    const [show, setShow] = useState(false);
+    const [questionPack, setQuestionPack]: any = useState([]);
+    const userEmailRedux: any = useSelector(selectUserEmail);
+    const loggedIn: any = useSelector(selectLoggedIN);
+    const [userDetail, setUserDetail]: any = useState([]);
+    const [savedTrigger, setSavedTrigger]: any = useState(false);
+    const [show, setShow]: any = useState(false);
 
     const userRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
 
     useEffect(() => { getQuestions(topic); getUserDetails() }, [savedTrigger])
 
     const getUserDetails = () => {
-        let detail = [];
+        let detail: any = [];
         userRef.onSnapshot((doc) => { detail.push(doc.data()); setUserDetail(detail); })
     }
 
-    const dateFormater = (date) => { var newDate = new Date(date).toString(); return newDate; }
+    const dateFormater = (date: any) => { return new Date(date).toString() }
 
-    const checkSaved = (id) => {
+    const checkSaved = (id: any) => {
         if (loggedIn) {
             if (userDetail[0]) {
-                const checked = userDetail[0].savedQuestions.filter((item) => item.questionId == id)
+                const checked = userDetail[0].savedQuestions.filter((item: any) => item.questionId == id)
                 return (checked.length == 0 ? false : true)
             }
         } else { return false; }
     }
 
-    const saveQuestion = (id, question) => {
+    const saveQuestion = (id: any, question: any) => {
         if (loggedIn) {
             if (checkSaved(id)) {
                 alert("Question is already saved ! Please remove it from Profile !")
@@ -51,12 +51,12 @@ export default function MainBody({ topic }) {
 
     }
 
-    const getQuestions = (filter) => {
-        let pack = [];
+    const getQuestions = (filter: any) => {
+        let pack: any = [];
         const quesRef = projectFirestore.collection('questionBank')
         quesRef.orderBy("quesTime", "desc").get().then(querySnapshot => {
-            querySnapshot.docs.map(doc => pack.push(doc.data()))
-            if (topic !== "Latest") { const packed = pack.filter(item => item.userTopic === filter); setQuestionPack(packed) }
+            querySnapshot.docs.forEach(doc => pack.push(doc.data()))
+            if (topic !== "Latest") { const packed = pack.filter((item: any) => item.userTopic === filter); setQuestionPack(packed) }
             else { setQuestionPack(pack) }
         })
     }
@@ -74,8 +74,9 @@ export default function MainBody({ topic }) {
             </PopupModal>
 
 
-            {questionPack &&
-                questionPack.map((item, index) => (
+            {
+                questionPack &&
+                questionPack.map((item: any, index: any) => (
                     < QuestionTab
                         key={index}
                         questionBar={true}
@@ -91,6 +92,6 @@ export default function MainBody({ topic }) {
                     />
                 ))
             }
-        </div>
+        </div >
     )
 }
