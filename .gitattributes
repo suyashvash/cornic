@@ -21,4 +21,4 @@
 #
 # Enable syntax highlighting for files with `.gitattributes` extensions.
 #
-*.gitattributes linguist-language=TypeScript
+*.gitattributes linguist-language=gitattributes
