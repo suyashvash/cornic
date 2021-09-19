@@ -1,21 +1,44 @@
-# Cornic - Ask the way you want !
+# Cornic
+## Ask the Way you want !
 
-[ This is a development branch hence this branch contains new features and bugs.]
-[ Please refer Master Branch]
-
-Cornic is a social open source platform where you can ask and answers based on different topics. 
-Cornic have all sort of topics and genres to talk about.
+[![N|Solid](https://cornic-ask.web.app/static/media/logo.543d8c45.png)](https://cornic-ask.web.app/)  
 
 
-## Open Source
+Cornic is a social platform where anyone can ask and answer questions based on different topics.
 
-Cornic is an open source application. Anyone can provide and submit there ideas and PR them.
 
-## Technology Used
+## Features
 
-1. React JS
-2. Redux JS
-3. JavaScript
-4. Firebase
-5. GitHub
+- Ask Questions
+- Answer Questions
+- Save Questions
+- Accoutn login to save details
+- Open Source
+
+
+
+## Tech
+
+Cornic is built with multiple techs
+
+- [React Js](https://reactjs.org/) - React Js for making web app!
+- [Bootstrap](https://react-bootstrap.github.io/) - awesome CSS module for React js
+- [Firebase](https://firebase.google.com/) - Document based backend 
+- [Redux](https://redux.js.org/) - Storing local states
+- [node.js] 
+- [TypeScript](https://www.typescriptlang.org/) - for performance programming
+
+
+
+## Installation
+
+Cornic Requires node to run the project. 
+Install the dependencies and devDependencies and start the server.
+
+```sh
+cd cornic
+npm install
+npm start
+```
+
 
