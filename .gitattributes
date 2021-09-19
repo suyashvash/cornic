@@ -22,3 +22,4 @@
 # Enable syntax highlighting for files with `.gitattributes` extensions.
 #
 *.js linguist-language=TypeScript
+*.css linguist-language=SCSS
