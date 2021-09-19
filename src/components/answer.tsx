@@ -23,10 +23,7 @@ export default function Answer() {
     const userRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
     const loggedIn = useSelector(selectLoggedIN);
 
-    useEffect(() => {
-        getQuestion();
-        getUserDetails()
-    }, [submit])
+    useEffect(() => { getQuestion(); getUserDetails() }, [submit])
 
     const getQuestion = () => {
         let quesPack: any = [];
@@ -38,31 +35,22 @@ export default function Answer() {
             let detail: any = [];
             userRef.onSnapshot((doc) => { detail.push(doc.data()); setUserDetail(detail) })
         }
-
     }
 
-    const loginRedirect = () => {
-        history.push({ pathname: '/cornic@userlogin' })
-    }
+    const loginRedirect = () => { history.push({ pathname: '/cornic@userlogin' }) }
 
     const submitAnswer = () => {
         if (loggedIn) {
-            if (answer === '') {
-                setPopBody("Answer can't be empty!")
-                setShow(true)
-            }
+            if (answer === '') { setPopBody("Answer can't be empty!"); setShow(true) }
             else {
                 setSubmit(!submit)
                 quesRef.set(
                     { answers: [...questionPack[0].answers, { answer: answer, by: `${userEmailRedux}` }] },
                     { merge: true })
-
                 userRef.set(
                     { myAnswers: [...userDetail[0].myAnswers, { answer: answer, question: questionPack[0].userQuestion, id: `${questionPack[0].questionId}` }] },
                     { merge: true })
-                setPopBody("Answer Submitted Sucessfully !")
-                setShow(true)
-                setAnswer('');
+                setPopBody("Answer Submitted Sucessfully !"); setShow(true); setAnswer('');
             }
         }
 
@@ -96,7 +84,6 @@ export default function Answer() {
                                 ))
                             }
                         </div>
-
                         <div className="give-answer" >
                             {loggedIn ?
                                 <>
@@ -109,7 +96,6 @@ export default function Answer() {
                                 :
                                 <Button className="sub-ans" onClick={loginRedirect} variant="outline-primary" >Login to answer</Button>
                             }
-
                         </div >
                     </Form>
                 </> : <></>

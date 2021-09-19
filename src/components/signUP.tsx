@@ -26,12 +26,8 @@ export default function SignUpPage() {
 
     const getUserName = () => {
         let detail: any = [];
-        userRef.get().then((querySnapshot: any) => {
-            querySnapshot.docs.forEach((doc: any) => detail.push(doc.data()))
-        })
+        userRef.get().then((querySnapshot: any) => { querySnapshot.docs.forEach((doc: any) => detail.push(doc.data())) })
         setUserList(detail)
-
-
     }
 
 
@@ -54,26 +50,15 @@ export default function SignUpPage() {
 
         if (email === '' || password === '' || userName === '') { setPopBody("Please fill all the fields"); setShow(true) }
         else {
-            if (/\s/.test(userName)) {
-                setPopBody("Please enter a username without spaces or /"); setShow(true)
-            } else {
-
+            if (/\s/.test(userName)) { setPopBody("Please enter a username without spaces or /"); setShow(true) }
+            else {
                 const filter = userList.filter((item: any) => item.userName === userName.toLowerCase())
                 if (filter.length === 0) {
                     createUserWithEmailAndPassword(auth, email, password)
-                        .then(() => {
-                            userRef.doc(`${email}`).set(data);
-                            setShow(true);
-                        })
+                        .then(() => { userRef.doc(`${email}`).set(data); setShow(true); })
                         .catch((error) => { const errorMessage = error.message; setErrorLog(errorMessage) });
-
-                } else {
-                    setErrorLog("Username already exists")
-                }
-
-
+                } else { setErrorLog("Username already exists") }
             }
-
         }
     }
 
@@ -86,16 +71,12 @@ export default function SignUpPage() {
                 <span>Ask the way you want !</span>
             </div>
 
-
-
             <PopupModal
                 show={show}
                 onHide={() => setShow(false)}
                 centered={true}
                 title={"Sign Up"}
                 body={popBody} />
-
-
 
             <div className="logger-div">
                 <h3>Sign Up</h3>
@@ -105,12 +86,10 @@ export default function SignUpPage() {
                             <Form.Label>Username</Form.Label>
                             <Form.Control onInputCapture={(e: any) => setUserName(e.target.value)} type="name" placeholder="*Can't be changed !" />
                         </Form.Group>
-
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
                             <Form.Label>Full Name</Form.Label>
                             <Form.Control onInputCapture={(e: any) => setName(e.target.value)} type="name" placeholder="John Doe" />
                         </Form.Group>
-
                     </div>
 
                     <Form.Group className="mb-3 signup-mb3" controlId="exampleForm.ControlInput2">

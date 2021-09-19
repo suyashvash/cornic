@@ -226,7 +226,9 @@ text-align: center;
   width: 80%;
   align-items: flex-start;
   padding-left: 50px;
-  height: 490px;
+  padding: 0px 0px 50px 10px;
+  /* height: 490px; */
+  margin-bottom: 30px;
   background-color: var(--second-base);
 
 .profile-tab-holder{
@@ -335,4 +337,120 @@ margin-top: 40px;
 .save-pop{
   flex-direction: column;
   align-items: flex-start;
+}
+
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 480px;
+
+@media  (max-width: $breakpoint-mobile) {
+  .App-body{
+    flex-direction: column;
+
+  }
+
+  .left-bar{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    overflow: scroll;
+    margin: auto;
+  }
+
+  .left-option{
+    padding: 10px;
+    margin: 10px;
+    font-size: 14px;
+  }
+
+  .MainBody{
+    width: 100%;
+    margin: auto;
+    
+  }
+
+  .questions{
+    width: 95%;
+  }
+
+  .login-page{
+    flex-direction: column;
+  }
+
+  .cornic-poster{
+
+    width: 100%;
+    display: contents;
+
+    img{
+      width: 70%;
+      margin: auto;
+    } 
+
+    h3,span{
+      display: none;
+    }
+  }
+
+  .logger-div{
+       width: 95%;
+    /* height: 70vh; */
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .name-place{
+    .mb-3{
+      margin-right:10px;
+    }
+  }
+
+  .mb-3{
+    margin-top: 0px;
+  }
+
+  .profile-card{
+    flex-direction: column;
+    width: 95%;
+
+    img{
+      width: 20%;
+    }
+
+    .profile-sub-head{
+      align-items: center;
+      margin-top: 15px;
+    }
+
+    .profile-options{
+      justify-content: center;
+      width: 100%;
+      margin-top: 20px;
+    }
+  }
+
+  .data-card{
+         padding: 0px;
+        width: 90%;
+        border-radius: 10px;
+        /* align-items: flex-start; */
+        /* padding-left: 50px;*/
+
+        .profile-tab-holder{
+          margin-top: 0px;
+          padding: 10px;
+        }
+  }
+
+  .ask-question-page{
+    width: 90%;
+
+    .ques-detail-holder{
+      display: none;
+    }
+  }
+  
+
+
 }
