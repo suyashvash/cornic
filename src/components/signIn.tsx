@@ -22,7 +22,7 @@ export default function SignIn(props: any) {
             signInWithEmailAndPassword(auth, email, password)
                 .then(() => {
                     dispatch(setActiveUser({ userEmail: email, loggedIn: true, }))
-                    props.history.push({ pathname: '/cornic@profile' });
+                    props.history.push({ pathname: '/cornic-profile' });
                 })
                 .catch((error) => { setErrorLog(error.message) });
         }
@@ -55,7 +55,7 @@ export default function SignIn(props: any) {
                         {errorLog}
                     </Form.Group>
                     <Button onClick={login} className="sub-ans" variant="outline-primary" >Login</Button>
-                    <Button className="sub-ans" href="cornic@signup" variant="secondary">Create Account</Button>
+                    <Button className="sub-ans" href="cornic-signup" variant="secondary">Create Account</Button>
                 </Form>
             </div>
         </div >

@@ -5,7 +5,7 @@ import { BsBookmark, BsFillBookmarkFill } from 'react-icons/bs';
 
 export default function QuestionTab(props: any) {
     const history = useHistory()
-    const goToAnswer = () => { history.push({ pathname: '/cornic@postAnswer', state: props.questionId }); }
+    const goToAnswer = () => { history.push({ pathname: '/cornic-postAnswer', state: props.questionId }); }
 
 
     return (

@@ -32,17 +32,17 @@ function App() {
         <div className="App-body">
           <Switch>
             <Route path="/" exact component={() => <Lobby topic="Latest" />} />
-            <Route path="/cornic@general" exact component={() => <Lobby topic="General" />} />
-            <Route path="/cornic@anime" exact component={() => <Lobby topic="Anime" />} />
-            <Route path="/cornic@gaming" exact component={() => <Lobby topic="Gaming" />} />
-            <Route path="/cornic@programming" exact component={() => <Lobby topic="Programming" />} />
-            <Route path="/cornic@movies" exact component={() => <Lobby topic="Movies" />} />
-            <Route path="/cornic@studies" exact component={() => <Lobby topic="Studies" />} />
-            <Route path="/cornic@profile" exact component={(props: any) => <Profile  {...props} />} />
-            <Route path="/cornic@userlogin" exact component={(props: any) => loggedIn ? <Profile /> : <SignIn {...props} />} />
-            <Route path="/cornic@signup" exact component={() => loggedIn ? <Profile /> : <SignUpPage />} />
-            <Route path="/cornic@ask" exact component={(props: any) => loggedIn ? <AskQuestion /> : <SignIn {...props} />} />
-            <Route path="/cornic@postAnswer" exact component={() => <Answer />} />
+            <Route path="/cornic-general" exact component={() => <Lobby topic="General" />} />
+            <Route path="/cornic-anime" exact component={() => <Lobby topic="Anime" />} />
+            <Route path="/cornic-gaming" exact component={() => <Lobby topic="Gaming" />} />
+            <Route path="/cornic-programming" exact component={() => <Lobby topic="Programming" />} />
+            <Route path="/cornic-movies" exact component={() => <Lobby topic="Movies" />} />
+            <Route path="/cornic-studies" exact component={() => <Lobby topic="Studies" />} />
+            <Route path="/cornic-profile" exact component={(props: any) => <Profile  {...props} />} />
+            <Route path="/cornic-userlogin" exact component={(props: any) => loggedIn ? <Profile /> : <SignIn {...props} />} />
+            <Route path="/cornic-signup" exact component={() => loggedIn ? <Profile /> : <SignUpPage />} />
+            <Route path="/cornic-ask" exact component={(props: any) => loggedIn ? <AskQuestion /> : <SignIn {...props} />} />
+            <Route path="/cornic-postAnswer" exact component={() => <Answer />} />
           </Switch>
         </div>
       </Router>
