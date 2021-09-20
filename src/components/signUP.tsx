@@ -102,7 +102,7 @@ export default function SignUpPage() {
                         {errorLog}
                     </Form.Group>
                     <Button className="sub-ans" variant="outline-primary" onClick={signUp} >Sign Up</Button>
-                    <Button className="sub-ans" href="cornic@userlogin" variant="secondary">Login</Button>
+                    <Button className="sub-ans" href="cornic-userlogin" variant="secondary">Login</Button>
                 </Form>
             </div>
         </div>

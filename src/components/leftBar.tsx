@@ -3,12 +3,12 @@ import { ImRocket } from 'react-icons/im'
 export default function LeftBar() {
 
     const topicList = [
-        { title: "General", link: "/cornic@general" },
-        { title: "Studies", link: "/cornic@studies" },
-        { title: "Anime", link: "/cornic@anime" },
-        { title: "Gaming", link: "/cornic@gaming" },
-        { title: "Programming", link: "/cornic@programming" },
-        { title: "Movies", link: "/cornic@movies" },
+        { title: "General", link: "/cornic-general" },
+        { title: "Studies", link: "/cornic-studies" },
+        { title: "Anime", link: "/cornic-anime" },
+        { title: "Gaming", link: "/cornic-gaming" },
+        { title: "Programming", link: "/cornic-programming" },
+        { title: "Movies", link: "/cornic-movies" },
     ]
 
     return (

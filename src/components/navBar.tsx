@@ -18,13 +18,13 @@ export default function NavBar() {
                 <Link to={{ pathname: "/" }}><span className="nav-head"> <img src={logo} alt="cornic Logo" width={50} /> <h4>Cornic</h4></span></Link>
                 <Nav>
                     <Nav.Item className="ml-auto">
-                        <Link className="ask-a-ques" to={{ pathname: "/cornic@ask" }}><FaPlus size={20} color={'white'} /></Link>
+                        <Link className="ask-a-ques" to={{ pathname: "/cornic-ask" }}><FaPlus size={20} color={'white'} /></Link>
                     </Nav.Item>
                     <Nav.Item className="ml-auto">
                         {loggedIn ?
-                            <Link to={{ pathname: "/cornic@profile" }}><ImUser size={25} color={'white'} /></Link>
+                            <Link to={{ pathname: "/cornic-profile" }}><ImUser size={25} color={'white'} /></Link>
                             :
-                            <Link to={{ pathname: "/cornic@userlogin" }}><ImUser size={25} color={'white'} /></Link>
+                            <Link to={{ pathname: "/cornic-userlogin" }}><ImUser size={25} color={'white'} /></Link>
                         }
                     </Nav.Item>
                 </Nav>
