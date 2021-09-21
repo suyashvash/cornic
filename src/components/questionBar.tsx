@@ -41,7 +41,7 @@ export default function QuestionTab(props: any) {
             <div className={props.profileView ? "base-flex ques-btn-holder profile-btn-view" : "base-flex ques-btn-holder"} >
                 <Button onClick={goToAnswer} className="sub-ans" size={'sm'} variant="outline-primary">Answer</Button>
                 {!props.profileView &&
-                    <div>
+                    <div className="opt">
                         <a className="sub-ans ques-option" onClick={props.shareQuestion}>
                             <FiShare2 size={22} />
                         </a>

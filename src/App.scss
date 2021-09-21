@@ -4,15 +4,7 @@
 background-color: var(--base);
 }
 
-.share-div{
-  width: 100%;
-  margin:20px;
-  justify-content: space-evenly;
 
-  .share-icon{
-    margin: 20px;
-  }
-}
 
 nav.navbar{
 padding: 20px;
@@ -324,7 +316,14 @@ margin-top: 40px;
 
   .ques-option{
     cursor: pointer;
-    
+    margin: 0px;
+  }
+
+  div.opt{
+    width: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
 }
