@@ -17,7 +17,7 @@ export default function Answer() {
     const [userDetail, setUserDetail] = useState<any>([]);
     const [popBody, setPopBody] = useState<string>('');
 
-    const quesId: any = history.location.state;
+    const quesId: any = history.location.hash.replace('#', '');
     const quesRef = projectFirestore.collection('questionBank').doc(quesId)
     const userEmailRedux = useSelector(selectUserEmail);
     const userRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
@@ -68,6 +68,7 @@ export default function Answer() {
             {questionPack.length !== 0 ?
                 <>
                     <Form>
+
                         <div className="question-list">
                             <h2 className="question-asked">{questionPack[0].userQuestion}</h2>
                             <div className="base-flex ques-detail-holder"> <p>Asked by - {questionPack[0].author}</p> <p>Asked on -{questionPack[0].quesTime}</p>  <p>Topic -{questionPack[0].userTopic}</p>   </div>

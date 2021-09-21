@@ -4,6 +4,16 @@
 background-color: var(--base);
 }
 
+.share-div{
+  width: 100%;
+  margin:20px;
+  justify-content: space-evenly;
+
+  .share-icon{
+    margin: 20px;
+  }
+}
+
 nav.navbar{
 padding: 20px;
 background-color: var(--base);
@@ -310,6 +320,13 @@ margin-top: 40px;
   align-content: center;
   justify-content: space-between;
   width: 100%;
+  margin-top: 30px;
+
+  .ques-option{
+    cursor: pointer;
+    
+  }
+
 }
 
 .profile-btn-view{
