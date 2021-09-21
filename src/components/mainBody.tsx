@@ -5,6 +5,7 @@ import { selectUserEmail, selectLoggedIN } from "../features/userSlice";
 import { useSelector } from "react-redux";
 import Button from "react-bootstrap/Button"
 import PopupModal from "./popModal";
+import { useHistory } from "react-router-dom";
 
 export default function MainBody(props: any) {
 
@@ -13,7 +14,9 @@ export default function MainBody(props: any) {
     const [savedTrigger, setSavedTrigger] = useState<boolean>(false);
     const [show, setShow] = useState<boolean>(false);
     const [popBody, setPopBody] = useState<string>('');
+    const [popTitle, setPopTitle] = useState<string>('');
 
+    const history = useHistory()
     const userEmailRedux: any = useSelector(selectUserEmail);
     const loggedIn: any = useSelector(selectLoggedIN);
     const userRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
@@ -26,6 +29,14 @@ export default function MainBody(props: any) {
     }
 
     const dateFormater = (date: any) => { return new Date(date).toString() }
+
+    const shareQuestion = (question: any, questionId: any) => {
+        const formattedQuestion: any = question.replaceAll(' ', '-');
+        navigator.clipboard.writeText(`cornic-ask.web.app/question?${formattedQuestion}/${questionId}`)
+        setPopTitle("Share question");
+        setPopBody("Question URL copied to Clipboard !")
+        setShow(true)
+    }
 
     const checkSaved = (id: any) => {
         if (loggedIn) {
@@ -40,6 +51,7 @@ export default function MainBody(props: any) {
         if (loggedIn) {
             if (checkSaved(id)) {
                 setPopBody("Question is already saved ! Please visit profile to un-save it.");
+                setPopTitle("Save question");
                 setShow(true);
             }
             else {
@@ -48,7 +60,7 @@ export default function MainBody(props: any) {
                     { merge: true })
                 setSavedTrigger(true)
             }
-        } else { setPopBody("Please login before saving a Question !"); setShow(true) }
+        } else { setPopBody("Please login before saving a Question !"); setPopTitle("Save question"); setShow(true) }
 
     }
 
@@ -72,9 +84,9 @@ export default function MainBody(props: any) {
                 show={show}
                 onHide={() => setShow(false)}
                 centered={false}
-                title={"Save Question"}
+                title={popTitle}
                 body={popBody}>
-                {!loggedIn && <Button className="sub-ans" variant="outline-primary" >Login</Button>}
+                {!loggedIn && <Button onClick={() => history.push({ pathname: '/cornic-userlogin' })} className="sub-ans" variant="outline-primary" >Login</Button>}
 
             </PopupModal>
 
@@ -92,6 +104,7 @@ export default function MainBody(props: any) {
                         profileView={false}
                         onSave={() => saveQuestion(item.questionId, item.userQuestion)}
                         saved={checkSaved(item.questionId)}
+                        shareQuestion={() => shareQuestion(item.userQuestion, item.questionId)}
 
                     />
                 ))

@@ -42,7 +42,7 @@ function App() {
             <Route path="/cornic-userlogin" exact component={(props: any) => loggedIn ? <Profile /> : <SignIn {...props} />} />
             <Route path="/cornic-signup" exact component={() => loggedIn ? <Profile /> : <SignUpPage />} />
             <Route path="/cornic-ask" exact component={(props: any) => loggedIn ? <AskQuestion /> : <SignIn {...props} />} />
-            <Route path="/cornic-postAnswer" exact component={() => <Answer />} />
+            <Route path="/question" exact component={() => <Answer />} />
           </Switch>
         </div>
       </Router>
