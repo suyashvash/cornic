@@ -95,14 +95,12 @@ margin-top: 20px;
 color: white;
 }
 
-h4.question{
-margin: 0px;
-font-size: 18px;
-}
+
 
 .time-asked{
 color: grey;
 font-size: 12px;
+margin-left: 10px;
 }
 
 .author-img{
@@ -111,12 +109,6 @@ margin: 5px;
 border: solid 2px black;
 }
 
-.author{
-margin: 0px;
-font-weight: 500;
-font-style: italic;
-font-size: 12px;
-}
 
 a.sub-ans,button.sub-ans{
 margin-top: 15px;
@@ -133,6 +125,24 @@ margin-top: 20px;
 flex-direction: column;
 align-items: flex-start;
 margin-left: 10px;
+
+  h4.question{
+  margin: 0px;
+  font-size: 18px;
+  }
+
+  .author{
+    margin: 0px;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 12px;
+    }
+
+    .answer-profile{
+      margin: 10px 0px;
+      color: grey;
+    }
+    
 }
 
 
@@ -303,16 +313,13 @@ margin-top: 40px;
   justify-content: space-between;
 }
 
-.answer-profile{
-  margin: 10px 0px;
-  color: grey;
-}
+
 
 .ques-btn-holder{
   align-content: center;
   justify-content: space-between;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 10px;
 
   .ques-option{
     cursor: pointer;

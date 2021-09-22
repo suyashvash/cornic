@@ -21,6 +21,7 @@ export default function MainBody(props: any) {
     const loggedIn: any = useSelector(selectLoggedIN);
     const userRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
 
+
     useEffect(() => { getQuestions(props.topic); getUserDetails() }, [savedTrigger])
 
     const getUserDetails = () => {
@@ -28,7 +29,7 @@ export default function MainBody(props: any) {
         userRef.onSnapshot((doc) => { detail.push(doc.data()); setUserDetail(detail); })
     }
 
-    const dateFormater = (date: any) => { return new Date(date).toString() }
+    const dateFormater = (date: any) => { return new Date(date).toLocaleString() }
 
     const shareQuestion = (question: any, questionId: any) => {
         const formattedQuestion: any = question.replaceAll(' ', '-');
