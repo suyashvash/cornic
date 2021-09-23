@@ -56,6 +56,8 @@ export default function Answer() {
 
     }
 
+    const dateFormater = (date: any) => { return new Date(date).toLocaleString() }
+
     return (
         <div className="ask-question-page">
             <PopupModal
@@ -71,7 +73,11 @@ export default function Answer() {
 
                         <div className="question-list">
                             <h2 className="question-asked">{questionPack[0].userQuestion}</h2>
-                            <div className="base-flex ques-detail-holder"> <p>Asked by - {questionPack[0].author}</p> <p>Asked on -{questionPack[0].quesTime}</p>  <p>Topic -{questionPack[0].userTopic}</p>   </div>
+                            <div className="base-flex ques-detail-holder">
+                                <p>Asked by - {questionPack[0].author}</p>
+                                <p>Asked on -{dateFormater(questionPack[0].quesTime)}</p>
+                                <p>Topic -{questionPack[0].userTopic}</p>
+                            </div>
                             <p >{questionPack[0].questionDesc} </p>
                         </div>
                         <div className="answer-list" >

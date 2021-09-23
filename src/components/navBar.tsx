@@ -6,6 +6,7 @@ import logo from '../assets/logo.png'
 import { FaPlus } from 'react-icons/fa'
 import { selectLoggedIN } from "../features/userSlice";
 import { useSelector } from "react-redux";
+import { BsInfoCircleFill } from 'react-icons/bs';
 
 import { Link } from 'react-router-dom'
 
@@ -26,6 +27,9 @@ export default function NavBar() {
                             :
                             <Link to={{ pathname: "/cornic-userlogin" }}><ImUser size={25} color={'white'} /></Link>
                         }
+                    </Nav.Item>
+                    <Nav.Item className="ml-auto">
+                        <Link className="ask-a-ques" to={{ pathname: "/cornic-about" }}><BsInfoCircleFill size={20} color={'white'} /></Link>
                     </Nav.Item>
                 </Nav>
             </Container>

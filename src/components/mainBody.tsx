@@ -21,6 +21,7 @@ export default function MainBody(props: any) {
     const loggedIn: any = useSelector(selectLoggedIN);
     const userRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
 
+
     useEffect(() => { getQuestions(props.topic); getUserDetails() }, [savedTrigger])
 
     const getUserDetails = () => {
@@ -28,11 +29,11 @@ export default function MainBody(props: any) {
         userRef.onSnapshot((doc) => { detail.push(doc.data()); setUserDetail(detail); })
     }
 
-    const dateFormater = (date: any) => { return new Date(date).toString() }
+    const dateFormater = (date: any) => { return new Date(date).toLocaleString() }
 
     const shareQuestion = (question: any, questionId: any) => {
         const formattedQuestion: any = question.replaceAll(' ', '-');
-        navigator.clipboard.writeText(`cornic-ask.web.app/question?${formattedQuestion}/${questionId}`)
+        navigator.clipboard.writeText(`cornic-ask.web.app/question?${formattedQuestion}/#${questionId}`)
         setPopTitle("Share question");
         setPopBody("Question URL copied to Clipboard !")
         setShow(true)
@@ -86,7 +87,7 @@ export default function MainBody(props: any) {
                 centered={false}
                 title={popTitle}
                 body={popBody}>
-                {!loggedIn && <Button onClick={() => history.push({ pathname: '/cornic-userlogin' })} className="sub-ans" variant="outline-primary" >Login</Button>}
+                {!loggedIn && popTitle === "Save question" && <Button onClick={() => history.push({ pathname: '/cornic-userlogin' })} className="sub-ans" variant="outline-primary" >Login</Button>}
 
             </PopupModal>
 
