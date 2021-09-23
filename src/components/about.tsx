@@ -39,10 +39,10 @@ export default function AboutPage() {
                 <Button target="blank" href="https://suyashvashishtha.tech/" className="sub-ans" variant="outline-light">My Portfolio</Button>
 
                 <div className="base-flex creator-links">
-                    <a className="creator-a" href="http://"><SiGithub size={28} /></a>
-                    <a className="creator-a" href="http://"><SiLinkedin size={28} /> </a>
-                    <a className="creator-a" href="http://"> <SiInstagram size={28} /> </a>
-                    <a className="creator-a" href="http://"> <HiMail size={28} /> </a>
+                    <a className="creator-a" href="https://github.com/suyashvash"><SiGithub size={28} /></a>
+                    <a className="creator-a" href="https://www.linkedin.com/in/suyashvashishtha/"><SiLinkedin size={28} /> </a>
+                    <a className="creator-a" href="https://www.instagram.com/suyash.codes/"> <SiInstagram size={28} /> </a>
+
                 </div>
             </div>
         </div>
