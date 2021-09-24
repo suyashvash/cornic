@@ -30,7 +30,7 @@ export default function SignIn(props: any) {
             signInWithEmailAndPassword(auth, email, password)
                 .then(() => {
                     dispatch(setActiveUser({ userEmail: email, loggedIn: true, }))
-                    props.history.push({ pathname: '/cornic-profile' });
+                    props.history.push({ pathname: '/profile' });
                 })
                 .catch((error) => { setErrorLog(error.message) });
         }

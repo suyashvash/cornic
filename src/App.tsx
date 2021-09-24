@@ -1,7 +1,7 @@
 import './index.css';
 import './App.scss';
 import NavBar from './components/navBar';
-import LeftBar from './components/leftBar';
+
 import MainBody from './components/mainBody';
 import {
   BrowserRouter as Router,
@@ -15,7 +15,7 @@ import Answer from './components/answer';
 import AskQuestion from './components/ask';
 import Profile from './components/profile';
 import SignUpPage from './components/signUP';
-
+import AboutPage from './components/about';
 
 
 import { useSelector } from "react-redux";
@@ -32,18 +32,20 @@ function App() {
         <NavBar />
         <div className="App-body">
           <Switch>
-            <Route path="/" exact component={() => <Lobby topic="Latest" />} />
-            <Route path="/cornic-general" exact component={() => <Lobby topic="General" />} />
-            <Route path="/cornic-anime" exact component={() => <Lobby topic="Anime" />} />
-            <Route path="/cornic-gaming" exact component={() => <Lobby topic="Gaming" />} />
-            <Route path="/cornic-programming" exact component={() => <Lobby topic="Programming" />} />
-            <Route path="/cornic-movies" exact component={() => <Lobby topic="Movies" />} />
-            <Route path="/cornic-studies" exact component={() => <Lobby topic="Studies" />} />
-            <Route path="/cornic-profile" exact component={(props: any) => <Profile  {...props} />} />
-            <Route path="/cornic-userlogin" exact component={(props: any) => loggedIn ? <Profile /> : <SignIn {...props} />} />
-            <Route path="/cornic-signup" exact component={() => loggedIn ? <Profile /> : <SignUpPage />} />
-            <Route path="/cornic-ask" exact component={(props: any) => loggedIn ? <AskQuestion /> : <SignIn {...props} />} />
+            <Route path="/" exact component={() => <MainBody topic={"Latest"} />} />
+            <Route path="/general" exact component={() => <MainBody topic={"General"} />} />
+            <Route path="/studies" exact component={() => <MainBody topic={"Studies"} />} />
+            <Route path="/anime" exact component={() => <MainBody topic={"Anime"} />} />
+            <Route path="/gaming" exact component={() => <MainBody topic={"Gaming"} />} />
+            <Route path="/programming" exact component={() => <MainBody topic={"Programming"} />} />
+            <Route path="/movies" exact component={() => <MainBody topic={"Movies"} />} />
+            <Route path="/profile" exact component={(props: any) => <Profile  {...props} />} />
+            <Route path="/login" exact component={(props: any) => loggedIn ? <Profile /> : <SignIn {...props} />} />
+            <Route path="/signup" exact component={() => loggedIn ? <Profile /> : <SignUpPage />} />
+            <Route path="/ask" exact component={(props: any) => loggedIn ? <AskQuestion /> : <SignIn {...props} />} />
             <Route path="/question" exact component={() => <Answer />} />
+            <Route path="/about" exact component={() => <AboutPage />} />
+
 
           </Switch>
         </div>
@@ -52,15 +54,6 @@ function App() {
   );
 }
 
-const Lobby = (props: any) => {
-  return (
-    <>
-      <LeftBar />
-      <MainBody topic={props.topic} />
-    </>
 
-  )
-
-}
 
 export default App;
