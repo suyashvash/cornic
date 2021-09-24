@@ -15,7 +15,7 @@ import Answer from './components/answer';
 import AskQuestion from './components/ask';
 import Profile from './components/profile';
 import SignUpPage from './components/signUP';
-import AboutPage from './components/about';
+
 
 
 import { useSelector } from "react-redux";
@@ -44,7 +44,7 @@ function App() {
             <Route path="/cornic-signup" exact component={() => loggedIn ? <Profile /> : <SignUpPage />} />
             <Route path="/cornic-ask" exact component={(props: any) => loggedIn ? <AskQuestion /> : <SignIn {...props} />} />
             <Route path="/question" exact component={() => <Answer />} />
-            <Route path="/cornic-about" exact component={() => <AboutPage />} />
+
           </Switch>
         </div>
       </Router>

@@ -55,7 +55,13 @@ export default function SignUpPage() {
                 const filter = userList.filter((item: any) => item.userName === userName.toLowerCase())
                 if (filter.length === 0) {
                     createUserWithEmailAndPassword(auth, email, password)
-                        .then(() => { userRef.doc(`${email}`).set(data); setShow(true); })
+                        .then(() => {
+                            userRef.doc(`${email}`).set(data); setShow(true);
+                            setUserName('')
+                            setName('')
+                            setEmail('')
+                            setPassword('')
+                        })
                         .catch((error) => { const errorMessage = error.message; setErrorLog(errorMessage) });
                 } else { setErrorLog("Username already exists") }
             }

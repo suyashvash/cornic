@@ -133,10 +133,6 @@ export default function MainBody(props: any) {
 
             <a onClick={questionFilter} className="floating-btn filter-btn"><FaFilter size={20} color={'white'} /></a>
 
-
-
-
-
         </div >
     )
 }

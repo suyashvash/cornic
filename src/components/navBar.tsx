@@ -34,9 +34,7 @@ export default function NavBar() {
                                 <Link to={{ pathname: "/cornic-userlogin" }}><ImUser size={25} color={'white'} /></Link>
                             }
                         </Nav.Item>
-                        <Nav.Item className="ml-auto">
-                            <Link className="ask-a-ques" to={{ pathname: "/cornic-about" }}><BsInfoCircleFill size={20} color={'white'} /></Link>
-                        </Nav.Item>
+
                     </Nav>
                 </Container>
             </Navbar >
@@ -52,8 +50,8 @@ export default function NavBar() {
                         </Link>
                     </Nav.Item>
 
-                    <Nav.Item className="ml-auto">
-                        <Link className="ask-a-ques" to={{ pathname: "/cornic-ask" }}><FaPlus size={20} color={'white'} /></Link>
+                    <Nav.Item className="ml-auto ask-hold">
+                        <Link className="ask-a-ques btm" to={{ pathname: "/cornic-ask" }}><FaPlus size={25} color={'white'} /></Link>
                     </Nav.Item>
                     <Nav.Item className="ml-auto">
                         {loggedIn ?
@@ -62,9 +60,7 @@ export default function NavBar() {
                             <Link to={{ pathname: "/cornic-userlogin" }}><ImUser size={25} color={'white'} /></Link>
                         }
                     </Nav.Item>
-                    <Nav.Item className="ml-auto">
-                        <Link className="ask-a-ques" to={{ pathname: "/cornic-about" }}><BsInfoCircleFill size={20} color={'white'} /></Link>
-                    </Nav.Item>
+
                 </Nav>
 
             </Navbar >

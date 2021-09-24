@@ -12,12 +12,20 @@ export default function SignIn(props: any) {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [errorLog, setErrorLog] = useState<string>('');
+
+    const [popTitle, setPopTitle] = useState<string>('');
+    const [popBody, setPopBody] = useState<any>('');
+
     const [show, setShow] = useState<boolean>(false);
     const auth = getAuth();
     const dispatch = useDispatch();
 
     const login = () => {
-        if (email === '' || password === '') { setShow(true) }
+        if (email === '' || password === '') {
+            setPopTitle("Login")
+            setPopBody("Please fill all the fields !")
+            setShow(true)
+        }
         else {
             signInWithEmailAndPassword(auth, email, password)
                 .then(() => {
@@ -28,14 +36,21 @@ export default function SignIn(props: any) {
         }
     }
 
+
+    const demoPop = () => {
+        setPopTitle("Demo Login")
+        setPopBody(<span>Id- demo@gmail.com <br /> Pass- demo123</span>)
+        setShow(true)
+    }
+
     return (
         <div className="login-page">
             <PopupModal
                 show={show}
                 onHide={() => setShow(false)}
                 centered={true}
-                title={"Sign In"}
-                body={"Please fill all the fields"} />
+                title={popTitle}
+                body={popBody} />
 
             <div className="cornic-poster">
                 <img src={logo} alt="Corinic Poster" />
@@ -56,6 +71,7 @@ export default function SignIn(props: any) {
                     </Form.Group>
                     <Button onClick={login} className="sub-ans" variant="outline-primary" >Login</Button>
                     <Button className="sub-ans" href="cornic-signup" variant="secondary">Create Account</Button>
+                    <Button onClick={demoPop} className="sub-ans" variant="outline-light" >Demo Account</Button>
                 </Form>
             </div>
         </div >
