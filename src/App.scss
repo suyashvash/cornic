@@ -42,6 +42,11 @@ nav.fixed-bottom{
 
 }
 
+.no-ques{
+  color: white;
+  font-size: 1.6rem;
+}
+
 
 .floating-btn{
   position: fixed;
@@ -118,6 +123,7 @@ font-size: 15px;
 width: 60%;
 height: 100%;
 padding: 20px;
+flex-direction: column;
 }
 
 
@@ -404,6 +410,61 @@ margin-top: 40px;
 }
 
 
+.about-page{
+  width: 90%;
+  height: 80vh;
+  margin: auto;
+  margin-top: 1rem;
+  border-radius: 10px;
+  justify-content: space-between;
+  color: white;
+
+  .about-page-section{
+    height: 100%;
+    background-color: var(--second-base);
+    border-radius: 8px;
+    flex-direction: column;
+  }
+
+  .about-div{
+    width: 70%;
+      padding: 3rem;
+      align-items: flex-start;
+     .techs{
+       width: 50%;
+       justify-content: space-between;
+       margin: 1rem 0px;
+     }
+  }
+  
+  .about-creator{
+    width: 28%;
+    p{
+      color: darkgray;
+      padding: 1rem;
+      margin-bottom: 0px;
+    }
+
+    img{
+      width: 7rem;
+      border-radius: 50%;
+      margin: 15px;
+    }
+
+    .creator-links{
+      width: 60%;
+    justify-content: space-evenly;
+       margin: 1rem 0px;
+
+       .creator-a,.creator-a:active,.creator-a:visited,.creator-a:hover{
+        color: white;
+       }
+    }
+  }
+}
+
+
+
 
 
 
@@ -447,6 +508,11 @@ $breakpoint-mobile: 480px;
   .ask-question-page{width: 90%;.ques-detail-holder{display: none;}}
 
 
+  .about-page{ flex-direction: column;height: auto;
+    .about-page-section {height: auto;width: 98%;}
+    .about-div{padding: 1rem; img{width: 10rem;}.techs {width: 80%;}}
+    .about-creator{margin: 50px 0px;}
+  }
   
 
 

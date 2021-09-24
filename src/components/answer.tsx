@@ -37,7 +37,7 @@ export default function Answer() {
         }
     }
 
-    const loginRedirect = () => { history.push({ pathname: '/cornic-userlogin' }) }
+    const loginRedirect = () => { history.push({ pathname: '/login' }) }
 
     const submitAnswer = () => {
         if (loggedIn) {

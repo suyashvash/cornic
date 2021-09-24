@@ -6,40 +6,40 @@ import { useSelector } from "react-redux";
 import Button from "react-bootstrap/Button"
 import PopupModal from "./popModal";
 import { useHistory } from "react-router-dom";
-
+import { ImRocket } from 'react-icons/im'
 import { FaFilter } from 'react-icons/fa';
 
 export default function MainBody(props: any) {
 
     const [questionPack, setQuestionPack] = useState<any>([]);
     const [userDetail, setUserDetail] = useState<any>([]);
-    const [savedTrigger, setSavedTrigger] = useState<boolean>(false);
+    const [reloadTrigger, setReloadTrigger] = useState<boolean>(false);
     const [show, setShow] = useState<boolean>(false);
     const [popBody, setPopBody] = useState<string>('');
     const [popTitle, setPopTitle] = useState<string>('');
     const [popChildren, setPopChildren] = useState<any>('');
 
     const history = useHistory()
-    const userEmailRedux: any = useSelector(selectUserEmail);
-    const loggedIn: any = useSelector(selectLoggedIN);
+    const userEmailRedux = useSelector(selectUserEmail);
+    const loggedIn = useSelector(selectLoggedIN);
     const userRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
 
     const topicList = [
-        { title: "General", link: "/cornic-general" },
-        { title: "Studies", link: "/cornic-studies" },
-        { title: "Anime", link: "/cornic-anime" },
-        { title: "Gaming", link: "/cornic-gaming" },
-        { title: "Programming", link: "/cornic-programming" },
-        { title: "Movies", link: "/cornic-movies" },
+        { title: "General", topic: "/general" },
+        { title: "Studies", topic: "/studies" },
+        { title: "Anime", topic: "/anime" },
+        { title: "Gaming", topic: "/gaming" },
+        { title: "Programming", topic: "/programming" },
+        { title: "Movies", topic: "/movies" },
     ]
 
-
-    useEffect(() => { getQuestions(props.topic); getUserDetails() }, [savedTrigger])
+    useEffect(() => { getQuestions(props.topic); getUserDetails() }, [reloadTrigger])
 
     const getUserDetails = () => {
         let detail: any = [];
         userRef.onSnapshot((doc) => { detail.push(doc.data()); setUserDetail(detail); })
     }
+
 
     const dateFormater = (date: any) => { return new Date(date).toLocaleString() }
 
@@ -48,22 +48,21 @@ export default function MainBody(props: any) {
         navigator.clipboard.writeText(`cornic-ask.web.app/question?${formattedQuestion}/#${questionId}`)
         setPopTitle("Share question");
         setPopBody("Question URL copied to Clipboard !")
+        setPopChildren('')
         setShow(true)
     }
 
     const checkSaved = (id: any) => {
-        if (loggedIn) {
-            if (userDetail[0]) {
-                const checked = userDetail[0].savedQuestions.filter((item: any) => item.questionId === id)
-                return (checked.length === 0 ? false : true)
-            }
+        if (loggedIn && userDetail[0]) {
+            const checked = userDetail[0].savedQuestions.filter((item: any) => item.questionId === id)
+            return (checked.length === 0 ? false : true)
         } else { return false; }
     }
 
-
+    const topicSetter = (filterTopic: any) => { history.push({ pathname: filterTopic }) }
 
     const questionFilter = () => {
-        setPopChildren(topicList.map((item: any, index: any) => (<a key={index} className="left-option" href={item.link} onClick={() => setShow(false)}> <h5>{item.title}</h5></a>)))
+        setPopChildren(topicList.map((item: any, index: any) => (<a key={index} className="left-option" onClick={() => topicSetter(item.topic)}> <h5>{item.title}</h5></a >)))
         setPopTitle("Filters")
         setShow(true)
     }
@@ -73,16 +72,23 @@ export default function MainBody(props: any) {
             if (checkSaved(id)) {
                 setPopBody("Question is already saved ! Please visit profile to un-save it.");
                 setPopTitle("Save question");
+                setPopChildren('');
                 setShow(true);
+
             }
             else {
                 userRef.set(
                     { savedQuestions: [...userDetail[0].savedQuestions, { questionId: id, question: question }] },
                     { merge: true })
-                setSavedTrigger(true)
+                setReloadTrigger(true)
             }
-        } else { setPopBody("Please login before saving a Question !"); setPopTitle("Save question"); setShow(true) }
+        } else {
+            setPopBody("Please login before saving a Question !");
+            setPopTitle("Save question");
+            setPopChildren(<Button onClick={() => history.push({ pathname: '/login' })} className="sub-ans" variant="outline-primary" >Login</Button>)
+            setShow(true);
 
+        }
     }
 
     const getQuestions = (filter: any) => {
@@ -90,7 +96,8 @@ export default function MainBody(props: any) {
         const quesRef = projectFirestore.collection('questionBank')
         quesRef.orderBy("quesTime", "desc").get().then(querySnapshot => {
             querySnapshot.docs.forEach(doc => pack.push(doc.data()))
-            if (props.topic !== "Latest") {
+            console.log(filter)
+            if (filter !== "Latest") {
                 const packed = pack.filter((item: any) => item.userTopic === filter);
                 setQuestionPack(packed);
             }
@@ -99,40 +106,41 @@ export default function MainBody(props: any) {
     }
 
     return (
-        <div className="MainBody">
+        <>
+            <div className="left-bar">
+                <h5><ImRocket /> Suggested</h5>
+                {topicList.map((item: any, index: any) => (<a key={index} className="left-option" onClick={() => topicSetter(item.topic)} > <h5>{item.title}</h5></a>))}
+            </div>
+            <div className="base-flex MainBody">
+                <PopupModal
+                    show={show}
+                    onHide={() => setShow(false)}
+                    centered={false}
+                    title={popTitle}
+                    body={popBody}>
+                    {popChildren}
+                </PopupModal>
 
-            <PopupModal
-                show={show}
-                onHide={() => setShow(false)}
-                centered={false}
-                title={popTitle}
-                body={popBody}>
-                {!loggedIn && popTitle === "Save question" && <Button onClick={() => history.push({ pathname: '/cornic-userlogin' })} className="sub-ans" variant="outline-primary" >Login</Button>}
-                {popChildren}
-            </PopupModal>
-
-            {
-                questionPack &&
-                questionPack.map((item: any, index: any) => (
-                    < QuestionTab
-                        key={index}
-                        questionBar={true}
-                        question={item.userQuestion}
-                        author={item.author}
-                        authorPic={item.authorPic}
-                        time={dateFormater(item.quesTime)}
-                        questionId={item.questionId}
-                        profileView={false}
-                        onSave={() => saveQuestion(item.questionId, item.userQuestion)}
-                        saved={checkSaved(item.questionId)}
-                        shareQuestion={() => shareQuestion(item.userQuestion, item.questionId)}
-
-                    />
-                ))
-            }
-
-            <a onClick={questionFilter} className="floating-btn filter-btn"><FaFilter size={20} color={'white'} /></a>
-
-        </div >
+                {
+                    questionPack.length &&
+                    questionPack.map((item: any, index: any) => (
+                        < QuestionTab
+                            key={index}
+                            questionBar={true}
+                            question={item.userQuestion}
+                            author={item.author}
+                            authorPic={item.authorPic}
+                            time={dateFormater(item.quesTime)}
+                            questionId={item.questionId}
+                            profileView={false}
+                            onSave={() => saveQuestion(item.questionId, item.userQuestion)}
+                            saved={checkSaved(item.questionId)}
+                            shareQuestion={() => shareQuestion(item.userQuestion, item.questionId)}
+                        />
+                    ))
+                }
+                <a onClick={questionFilter} className="floating-btn filter-btn"><FaFilter size={20} color={'white'} /></a>
+            </div >
+        </>
     )
 }
