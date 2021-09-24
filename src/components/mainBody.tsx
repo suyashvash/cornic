@@ -7,6 +7,8 @@ import Button from "react-bootstrap/Button"
 import PopupModal from "./popModal";
 import { useHistory } from "react-router-dom";
 
+import { FaFilter } from 'react-icons/fa';
+
 export default function MainBody(props: any) {
 
     const [questionPack, setQuestionPack] = useState<any>([]);
@@ -15,11 +17,21 @@ export default function MainBody(props: any) {
     const [show, setShow] = useState<boolean>(false);
     const [popBody, setPopBody] = useState<string>('');
     const [popTitle, setPopTitle] = useState<string>('');
+    const [popChildren, setPopChildren] = useState<any>('');
 
     const history = useHistory()
     const userEmailRedux: any = useSelector(selectUserEmail);
     const loggedIn: any = useSelector(selectLoggedIN);
     const userRef = projectFirestore.collection('users').doc(`${userEmailRedux}`)
+
+    const topicList = [
+        { title: "General", link: "/cornic-general" },
+        { title: "Studies", link: "/cornic-studies" },
+        { title: "Anime", link: "/cornic-anime" },
+        { title: "Gaming", link: "/cornic-gaming" },
+        { title: "Programming", link: "/cornic-programming" },
+        { title: "Movies", link: "/cornic-movies" },
+    ]
 
 
     useEffect(() => { getQuestions(props.topic); getUserDetails() }, [savedTrigger])
@@ -46,6 +58,14 @@ export default function MainBody(props: any) {
                 return (checked.length === 0 ? false : true)
             }
         } else { return false; }
+    }
+
+
+
+    const questionFilter = () => {
+        setPopChildren(topicList.map((item: any, index: any) => (<a key={index} className="left-option" href={item.link} onClick={() => setShow(false)}> <h5>{item.title}</h5></a>)))
+        setPopTitle("Filters")
+        setShow(true)
     }
 
     const saveQuestion = (id: any, question: any) => {
@@ -88,7 +108,7 @@ export default function MainBody(props: any) {
                 title={popTitle}
                 body={popBody}>
                 {!loggedIn && popTitle === "Save question" && <Button onClick={() => history.push({ pathname: '/cornic-userlogin' })} className="sub-ans" variant="outline-primary" >Login</Button>}
-
+                {popChildren}
             </PopupModal>
 
             {
@@ -110,6 +130,13 @@ export default function MainBody(props: any) {
                     />
                 ))
             }
+
+            <a onClick={questionFilter} className="floating-btn filter-btn"><FaFilter size={20} color={'white'} /></a>
+
+
+
+
+
         </div >
     )
 }

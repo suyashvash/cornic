@@ -2,7 +2,7 @@ import logo from '../assets/logo.png'
 import Button from 'react-bootstrap/Button'
 import { FaReact } from 'react-icons/fa'
 import { SiRedux, SiInstagram, SiLinkedin, SiFirebase, SiBootstrap, SiJavascript, SiTypescript, SiSass, SiGithub } from 'react-icons/si'
-import { HiMail } from 'react-icons/hi'
+
 
 export default function AboutPage() {
     return (

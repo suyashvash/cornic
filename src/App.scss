@@ -27,11 +27,46 @@ color: white;
 text-decoration: none;
 }
 
+nav.fixed-bottom{
+    display: none;
+  justify-content: center;
+ 
+
+  .bottom-bar-holder{
+    width: 90%;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: auto;
+  }
+
+}
+
+
+.floating-btn{
+  position: fixed;
+  cursor: pointer;
+    width: 60px;
+    height: 60px;
+    bottom: 80px;
+    right: 20px;
+    background-color: #0d6efd;
+    color: #FFF;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+
+
+}
+
+
 .App-body{
 display: flex;
 flex-direction: row;
 justify-content: flex-start;
 background-color: var(--base);
+margin-top: 5rem;
 }
 
 
@@ -429,140 +464,44 @@ $breakpoint-tablet: 768px;
 $breakpoint-mobile: 480px;
 
 @media  (max-width: $breakpoint-mobile) {
-  .App-body{
-    flex-direction: column;
 
-  }
-
-  .left-bar{
-    width: 80%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    overflow: scroll;
-    margin: auto;
-  }
-
-  .left-option{
-    padding: 10px;
-    margin: 10px;
-    font-size: 14px;
-  }
-
-  .MainBody{
-    width: 100%;
-    margin: auto;
-    
-  }
-
-  .questions{
-    width: 95%;
-  }
-
-  .login-page{
-    flex-direction: column;
-  }
-
+  .App-body{ flex-direction: column;margin-top: 0px;}
+  nav.fixed-bottom{ display: block;}
+  nav.fixed-top{display: none;}
+  .floating-btn{display: flex;}
+  .left-bar{display: none;}
+  .left-option{ padding: 10px; margin: 10px; font-size: 14px;width: 90%;}
+  .MainBody{width: 100%;margin: auto;margin-bottom: 60px;}
+  .questions{width: 95%;}
+  .login-page{flex-direction: column;}
   .cornic-poster{
-
     width: 100%;
     display: contents;
-
-    img{
-      width: 70%;
-      margin: auto;
-    } 
-
-    h3,span{
-      display: none;
-    }
+    img{width: 70%;margin: auto;} 
+    h3,span{display: none;}
   }
 
-  .logger-div{
-       width: 95%;
-    /* height: 70vh; */
-    margin-top: 30px;
-    margin-bottom: 20px;
-  }
-
-  .name-place{
-    .mb-3{
-      margin-right:10px;
-    }
-  }
-
-  .mb-3{
-    margin-top: 0px;
-  }
+  .logger-div{width: 95%; margin-top: 30px;margin-bottom: 20px;}
+  .name-place{.mb-3{margin-right:10px;}}
+  .mb-3{margin-top: 0px;}
 
   .profile-card{
     flex-direction: column;
     width: 95%;
-
-    img{
-      width: 20%;
-    }
-
-    .profile-sub-head{
-      align-items: center;
-      margin-top: 15px;
-    }
-
-    .profile-options{
-      justify-content: center;
-      width: 100%;
-      margin-top: 20px;
-    }
+    img{width: 20%;}
+    .profile-sub-head{align-items: center;margin-top: 15px;}
+    .profile-options{justify-content: center;width: 100%;margin-top: 20px;}
   }
 
-  .data-card{
-         padding: 0px;
-        width: 90%;
-        border-radius: 10px;
-        /* align-items: flex-start; */
-        /* padding-left: 50px;*/
-
-        .profile-tab-holder{
-          margin-top: 0px;
-          padding: 10px;
-        }
+  .data-card{padding: 0px;width: 90%;border-radius: 10px;
+    .profile-tab-holder{margin-top: 0px;padding: 10px;}
   }
+  .ask-question-page{width: 90%;.ques-detail-holder{display: none;}}
 
-  .ask-question-page{
-    width: 90%;
-
-    .ques-detail-holder{
-      display: none;
-    }
-  }
-
-  .about-page{
-    flex-direction: column;
-    height: auto;
-
-    .about-page-section {
-      height: auto;
-      width: 98%;
-    }
-
-    .about-div{
- 
-      padding: 1rem;
-
-      img{
-        width: 10rem;
-      }
-    .techs {
-        width: 80%;
-      }
-    }
-
-    .about-creator{
-      margin: 50px 0px;
-    }
-
-
+  .about-page{ flex-direction: column;height: auto;
+    .about-page-section {height: auto;width: 98%;}
+    .about-div{padding: 1rem; img{width: 10rem;}.techs {width: 80%;}}
+    .about-creator{margin: 50px 0px;}
   }
   
 
