@@ -66,7 +66,7 @@ export default function NavBar() {
                     </Nav.Item>
 
                     <Nav.Item className="ml-auto">
-                        <Link className="ask-a-ques" to={{ pathname: "/cornic-about" }}><BsInfoCircleFill size={20} color={'white'} /></Link>
+                        <Link className="ask-a-ques" to={{ pathname: "/about" }}><BsInfoCircleFill size={20} color={'white'} /></Link>
                     </Nav.Item>
 
                 </Nav>
