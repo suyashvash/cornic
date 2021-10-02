@@ -1,7 +1,6 @@
 import './index.css';
 import './App.scss';
 import NavBar from './components/navBar';
-
 import MainBody from './components/mainBody';
 import {
   BrowserRouter as Router,

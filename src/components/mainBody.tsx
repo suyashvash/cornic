@@ -8,6 +8,7 @@ import PopupModal from "./popModal";
 import { useHistory } from "react-router-dom";
 import { ImRocket } from 'react-icons/im'
 import { FaFilter } from 'react-icons/fa';
+import LoadingScreen from "./LoadingScreen";
 
 export default function MainBody(props: any) {
 
@@ -18,6 +19,7 @@ export default function MainBody(props: any) {
     const [popBody, setPopBody] = useState<string>('');
     const [popTitle, setPopTitle] = useState<string>('');
     const [popChildren, setPopChildren] = useState<any>('');
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const history = useHistory()
     const userEmailRedux = useSelector(selectUserEmail);
@@ -96,51 +98,62 @@ export default function MainBody(props: any) {
         const quesRef = projectFirestore.collection('questionBank')
         quesRef.orderBy("quesTime", "desc").get().then(querySnapshot => {
             querySnapshot.docs.forEach(doc => pack.push(doc.data()))
-            console.log(filter)
+
             if (filter !== "Latest") {
                 const packed = pack.filter((item: any) => item.userTopic === filter);
                 setQuestionPack(packed);
             }
             else { setQuestionPack(pack) }
+            setIsLoading(false)
         })
     }
 
     return (
-        <>
-            <div className="left-bar">
-                <h5><ImRocket /> Suggested</h5>
-                {topicList.map((item: any, index: any) => (<a key={index} className="left-option" onClick={() => topicSetter(item.topic)} > <h5>{item.title}</h5></a>))}
-            </div>
-            <div className="base-flex MainBody">
-                <PopupModal
-                    show={show}
-                    onHide={() => setShow(false)}
-                    centered={false}
-                    title={popTitle}
-                    body={popBody}>
-                    {popChildren}
-                </PopupModal>
+        !isLoading ?
+            <>
+                <div className="left-bar">
+                    <h5><ImRocket /> Suggested</h5>
+                    {topicList.map((item: any, index: any) => (<a key={index} className="left-option" onClick={() => topicSetter(item.topic)} > <h5>{item.title}</h5></a>))}
+                </div>
+                <div className="base-flex MainBody">
+                    <PopupModal
+                        show={show}
+                        onHide={() => setShow(false)}
+                        centered={false}
+                        title={popTitle}
+                        body={popBody}>
+                        {popChildren}
+                    </PopupModal>
 
-                {
-                    questionPack.length &&
-                    questionPack.map((item: any, index: any) => (
-                        < QuestionTab
-                            key={index}
-                            questionBar={true}
-                            question={item.userQuestion}
-                            author={item.author}
-                            authorPic={item.authorPic}
-                            time={dateFormater(item.quesTime)}
-                            questionId={item.questionId}
-                            profileView={false}
-                            onSave={() => saveQuestion(item.questionId, item.userQuestion)}
-                            saved={checkSaved(item.questionId)}
-                            shareQuestion={() => shareQuestion(item.userQuestion, item.questionId)}
-                        />
-                    ))
-                }
-                <a onClick={questionFilter} className="floating-btn filter-btn"><FaFilter size={20} color={'white'} /></a>
-            </div >
-        </>
+                    {
+                        questionPack.length ?
+                            questionPack.map((item: any, index: any) => (
+                                < QuestionTab
+                                    key={index}
+                                    questionBar={true}
+                                    question={item.userQuestion}
+                                    author={item.author}
+                                    authorPic={item.authorPic}
+                                    time={dateFormater(item.quesTime)}
+                                    questionId={item.questionId}
+                                    profileView={false}
+                                    onSave={() => saveQuestion(item.questionId, item.userQuestion)}
+                                    saved={checkSaved(item.questionId)}
+                                    shareQuestion={() => shareQuestion(item.userQuestion, item.questionId)}
+                                />
+                            ))
+                            :
+                            <div className="base-flex no-questions-div">
+                                <h3>No questions in {props.topic} section</h3>
+                                <span>Start the discussion by asking one !</span>
+                                <Button onClick={() => { history.push({ pathname: "/ask" }) }} className="sub-ans" size={'sm'} variant="outline-primary">Ask Question !</Button>
+                            </div>
+
+                    }
+                    <a onClick={questionFilter} className="floating-btn filter-btn"><FaFilter size={20} color={'white'} /></a>
+                </div >
+            </>
+            :
+            <LoadingScreen />
     )
 }
